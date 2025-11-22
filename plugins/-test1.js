@@ -19,7 +19,8 @@ handler.before = async (m, { conn }) => {
     await conn.sendMessage(m.chat, { text: 'Denegado!' }, { quoted: m });
     delete tempStorage[m.sender.id];
   } else {
-    await conn.sendMessage(m.chat, { text: 'Opción inválida. Por favor, responde con Si o No.' }, { quoted: m });
+    await conn.sendMessage(m.chat, { text: 'Opción no válida. Por favor, responde con Si o No.' }, { quoted: m });
+    // No se elimina la propiedad esperando para que el usuario pueda responder de nuevo
   }
 };
 
