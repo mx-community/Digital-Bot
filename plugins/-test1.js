@@ -18,7 +18,7 @@ headers: {
 let imgs = upload.data.data.url
 let colors = await fetch(`https://apis-starlights-team.koyeb.app/starlight/colorize-ai?url=${imgs)}`)
 let json = await colors.json()
-await conn.sendMessage(m.chat, { image: { url: json.url }, caption: `${wm}` }, { quoted: m })
+await conn.sendMessage(m.chat, { image: { url: json.url }, caption: `${botname}` }, { quoted: m })
 //conn.sendFile(m.chat, json.url, 'colorized.jpg', null, m)
 }
 handler.command = ["e-rize", "rize"]
