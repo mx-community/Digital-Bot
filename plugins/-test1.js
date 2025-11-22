@@ -1,43 +1,48 @@
-import util from 'util'
-import path from 'path'
-let user = a => '@' + a.split('@')[0]
-function handler(m, { groupMetadata, command, conn, text, usedPrefix}) {
-
-if (!text) return conn.sendMessage(m.chat, { text: `Ingrese el comando y escriba el texto que desea colocar en el top.\n\n• *Por ejemplo:*\n${usedPrefix + command} Mancos` }, { quoted: m })
-let ps = groupMetadata.participants.map(v => v.id)
-let a = ps.getRandom()
-let b = ps.getRandom()
-let c = ps.getRandom()
-let d = ps.getRandom()
-let e = ps.getRandom()
-let f = ps.getRandom()
-let g = ps.getRandom()
-let h = ps.getRandom()
-let i = ps.getRandom()
-let j = ps.getRandom()
-let k = Math.floor(Math.random() * 70);
-
-let top = `•─• •⟤ *TOP* ⟥• •─•
-• _Los_ 10 _${text} encontrados en el grupo._
-    
-1. ${user(a)}
-2. ${user(b)}
-3. ${user(c)}
-4. ${user(d)}
-5. ${user(e)}
-6. ${user(f)}
-7. ${user(g)}
-8. ${user(h)}
-9. ${user(i)}
-10. ${user(j)}`
-//await m.react("❤️")
-await conn.sendMessage(m.chat, { text: top, mentions: [a, b, c, d, e, f, g, h, i, j] }, { quoted: m })
+import fetch from 'node-fetch';
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+if (!text) {
+return conn.sendMessage(m.chat, { text: `Ingrese el comando y escriba la ubicacion del lugar (provincia) para ver el clima.\n\n• Por ejemplo:\n*${usedPrefix + command}* Formosa` }, { quoted: m });
 }
-handler.command = ['top']
-handler.group = true
-export default handler
+await m.react("⏰");
+try {
+const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(text)}&units=metric&appid=060a6bcfa19809c2cd4d97a212b19273`;
+const response = await fetch(apiUrl);
+if (!response.ok) {
+return conn.sendMessage(m.chat, { text: `📍  La ubicacion no fue encontrada o esta mal escrito, recuerde usar una ubicacion provincial.\n\n• Por ejemplo:\n*${usedPrefix + command}* Formosa` }, { quoted: m });
+}
+const data = await response.json();
+if (data.cod !== 200) {
+throw new Error(data.message || 'Ocurrió un error');
+}
+const location = data.name;
+const country = data.sys.country;
+const weatherDescription = data.weather[0].description;
+const currentTemperature = `${data.main.temp}°C`;
+const minTemperature = `${data.main.temp_min}°C`;
+const maxTemperature = `${data.main.temp_max}°C`;
+const humidity = `${data.main.humidity}%`;
+const windSpeed = `${data.wind.speed} km/h`;
 
-function pickRandom(list) {
-return list[Math.floor(Math.random() * list.length)]}
+const weatherMessage = `*CLIMA  -  ACTUAL*
+⊹┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄⊹
 
+📌 *Ubicacion:* ${location}
+🌎 *Pais:* ${country}
+🌐 *Provincia:* ${weatherDescription}
+📆 *Fecha:* ${botdate}
+🌡️ *Temperatura actual:* ${currentTemperature}
+🚀 *Máxima:* ${maxTemperature}
+🛰️ *Mínima:* ${minTemperature}
+💧 *Humedad:* ${humidity}
+🌬️ *Velocidad del viento:* ${windSpeed}
+`;
+await conn.sendMessage(m.chat, { text: weatherMessage }, { quoted: m });
+await m.react("✅")
+} catch (error) {
+console.error(error);
+await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = ${error}.` }, { quoted: m })
+}
+};
 
+handler.command = ['clima', 'weather'];
+export default handler;
