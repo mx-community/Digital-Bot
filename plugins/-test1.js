@@ -1,7 +1,7 @@
 let esperaRespuesta = {};
 
-const handler = async (m, { conn, command, usedPrefix, text }) => {
-  if (command === 'prueba') {
+const handler = async (m, { conn }) => {
+  if (m.text.startsWith('#prueba')) {
     try {
       const id = `${m.chat.id}_${m.sender.id}`;
       esperaRespuesta[id] = true;
@@ -10,31 +10,27 @@ const handler = async (m, { conn, command, usedPrefix, text }) => {
     } catch (error) {
       console.log('Error al enviar mensaje:', error);
     }
-  }
-};
-
-handler.before = async (m, { conn }) => {
-  try {
-    const id = `${m.chat.id}_${m.sender.id}`;
-    if (esperaRespuesta[id]) {
-      const text = m.text.trim().toLowerCase();
-      if (text === 'si') {
-        await conn.sendMessage(m.chat.id, { text: 'Confirmado!' }, { quoted: m });
-        delete esperaRespuesta[id];
-      } else if (text === 'no') {
-        await conn.sendMessage(m.chat.id, { text: 'Denegado!' }, { quoted: m });
-        delete esperaRespuesta[id];
-      } else {
-        await conn.sendMessage(m.chat.id, { text: 'Opción inválida. Por favor, responde con Si o No.' }, { quoted: m });
+  } else {
+    try {
+      const id = `${m.chat.id}_${m.sender.id}`;
+      if (esperaRespuesta[id]) {
+        const text = m.text.trim().toLowerCase();
+        if (text === 'si') {
+          await conn.sendMessage(m.chat.id, { text: 'Confirmado!' }, { quoted: m });
+          delete esperaRespuesta[id];
+        } else if (text === 'no') {
+          await conn.sendMessage(m.chat.id, { text: 'Denegado!' }, { quoted: m });
+          delete esperaRespuesta[id];
+        } else {
+          await conn.sendMessage(m.chat.id, { text: 'Opción inválida. Por favor, responde con Si o No.' }, { quoted: m });
+        }
       }
-      return true;
+    } catch (error) {
+      console.log('Error en else:', error);
     }
-  } catch (error) {
-    console.log('Error en before:', error);
   }
-  return true;
 };
 
-handler.command = ['prueba'];
+handler.command = [];
 
 export default handler;
