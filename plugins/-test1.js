@@ -1,19 +1,43 @@
-let handler = async (m, { conn, command, usedPrefix, text, args }) => {
+import util from 'util'
+import path from 'path'
+let user = a => '@' + a.split('@')[0]
+function handler(m, { groupMetadata, command, conn, text, usedPrefix}) {
 
-if (command === "person") {
-if (!text) return conn.reply(m.chat, `Por favor, ingrese el nombre de alguna persona.`, m)
-let personalidad = `· •─• ✦ *PERSONALIDAD:*\n⊸⊹ *Nombre:* ${text}\n⊸⊹ *Alegria:* ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}\n⊸⊹ *Maldad:* ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}\n⊸⊹ *Tipo:* ${pickRandom(['De buen corazón','Arrogante','Tacaño','Generoso','Humilde','Tímido','Cobarde','Entrometido','Cristal','No binarie XD', 'Pendejo'])}\n⊸⊹ *Estado:* ${pickRandom(['Pesado','De malas','Distraido','En masturbación','Chismoso','Egoista','De compras','Viendo anime','Solitario','Vago','Mujeriego','En el celular', 'Alegre', 'Sonriente'])}\n⊸⊹ *Inteligencia:* ${pickRandom(['9%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}\n⊸⊹ *Coraje:* ${pickRandom(['9%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}\n⊸⊹ *Miedo:* ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}\n⊸⊹ *Tristesa:* ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}\n⊸⊹ *Rencor:* ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}\n⊸⊹ *Amor:* ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}\n⊸⊹ *Genero:* ${pickRandom(['Hombre', 'Mujer', 'Homosexual', 'Bisexual', 'Pansexual', 'Feminista', 'Heterosexual', 'Macho alfa', 'Mujerzona', 'Marimacha', 'Palosexual', 'PlayStationSexual', 'Sr. Manuela', 'Pollosexual'])}`
-conn.sendMessage(m.chat, { text: personalidad, contextInfo: { externalAdReply: { title: text, body: "Personalidad verificada.", thumbnailUrl: global.mMages, sourceUrl: null, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: false }}}, { quoted: m })
+if (!text) return conn.sendMessage(m.chat, { text: `Ingrese el comando y escriba el texto que desea colocar en el top.\n\n• *Por ejemplo:*\n${usedPrefix + command} Mancos` }, { quoted: m })
+let ps = groupMetadata.participants.map(v => v.id)
+let a = ps.getRandom()
+let b = ps.getRandom()
+let c = ps.getRandom()
+let d = ps.getRandom()
+let e = ps.getRandom()
+let f = ps.getRandom()
+let g = ps.getRandom()
+let h = ps.getRandom()
+let i = ps.getRandom()
+let j = ps.getRandom()
+let k = Math.floor(Math.random() * 70);
+
+let top = `•─• •⟤ *TOP* ⟥• •─•
+• _Los_ 10 _${text} encontrados en el grupo._
+    
+1. ${user(a)}
+2. ${user(b)}
+3. ${user(c)}
+4. ${user(d)}
+5. ${user(e)}
+6. ${user(f)}
+7. ${user(g)}
+8. ${user(h)}
+9. ${user(i)}
+10. ${user(j)}`
+//await m.react("❤️")
+await conn.sendMessage(m.chat, { text: top, mentions: [a, b, c, d, e, f, g, h, i, j] }, { quoted: m })
 }
-}
-handler.command = ['person']
+handler.command = ['top']
+handler.group = true
 export default handler
 
-global.iq = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "32", "34", "45", "54", "64", "67", "53", "84", "23", "69", "152", "167", "194", "200", "258", "295", "310", "373", "400", "424", "463", "484", "???", "934", "924", "735", "853", "993", "1.535", "1.426", "1.242", "1.928", "3.000"]
-
-
 function pickRandom(list) {
-return list[Math.floor(Math.random() * list.length)]
-}
+return list[Math.floor(Math.random() * list.length)]}
 
 
