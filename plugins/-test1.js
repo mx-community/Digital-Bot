@@ -22,7 +22,7 @@ if (command === "punch" || command === "pegar") {
 if (m.mentionedJid.length > 0) {
 str = `\`${name2}\` *golpeó a* \`${name || who}\`.`;
 } else if (m.quoted) {
-str = `\`${name2}\` *coñazio a* \`${name || who}\`.`;
+str = `\`${name2}\` *golpeo a* \`${name || who}\`.`;
 } else {
 str = `\`${name2}\` *se golpeó a sí mismo.*`.trim();
 }
