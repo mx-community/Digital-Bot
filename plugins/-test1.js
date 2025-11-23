@@ -16,7 +16,9 @@ const message = `
 ❒ *Profundidad:* ${data.Kedalaman}
 ❒ *Coordenadas:* ${data.Coordinates}
 ❒ *Sentido:* ${data.Dirasakan.length > 3 ? `${data.Dirasakan}` : 'No verificado.'}`;
-await conn.sendMessage(m.chat, { text: message, contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnailUrl: 'https://data.bmkg.go.id/DataMKG/TEWS/' + data.Shakemap, mediaType: 1, showAdAttribution: true, renderLargerThumbnail: true }}} , { quoted: m });
+await conn.reply(m.chat, message, m)
+  
+  //conn.sendMessage(m.chat, { text: message, contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnailUrl: 'https://data.bmkg.go.id/DataMKG/TEWS/' + data.Shakemap, mediaType: 1, showAdAttribution: true, renderLargerThumbnail: true }}} , { quoted: m });
 } catch (error) {
 console.error(error);
 await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = Command error, try again and if the error persists, report the command.` }, { quoted: m });
