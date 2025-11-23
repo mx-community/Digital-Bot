@@ -19,7 +19,7 @@ title: "々  D O N A T E  々",
 body: botname, 
 thumbnail: thumb, 
 sourceUrl: null, 
-mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
+mediaType: 1, renderLargerThumbnail: false }}}, { quoted: m })
 //await conn.sendMessage(m.chat, { text: donaXd }, { quoted: m });
 }
 };
