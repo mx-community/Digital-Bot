@@ -12,9 +12,12 @@ const thumb = Buffer.from(await (await fetch(`${global.mImagen}`)).arrayBuffer()
 let infoHtml = `·─┄ · ✦ *Website : Html* ✦ ·
 > Se ha extraido la pagina web con exito.
 
-⊹ ✎ *Hecho:* HTML
-⊹ ✎ *Pagina:* ${args[0]}
-${data}`
+⊹ Hecho : HTML
+⊹ Pagina : ${args[0]}
+
+\`\`\`
+${data}
+\`\`\``
 let paginaHtml = `${data}`
 
 m.react('✅');
@@ -24,7 +27,7 @@ body: textbot,
 thumbnail: thumb, 
 sourceUrl: null, 
 mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m });
-conn.sendMessage(m.chat, { text: paginaHtml.trim() }, m);
+//conn.sendMessage(m.chat, { text: paginaHtml.trim() }, m);
 //conn.sendMessage(m.chat, { image: { url: xd }, caption: html }, { quoted: fkontak });
 };
 
