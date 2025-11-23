@@ -19,7 +19,7 @@ const message = `
 > ${data.Dirasakan.length > 3 ? `${data.Dirasakan}` : 'No verificado.'}
 
 \t⧡ Magnitud : *${data.Magnitude}*
-\t⧡ Profundio : *${data.Kedalaman}*
+\t⧡ Profundidad : *${data.Kedalaman}*
 \t⧡ Coordenadas : *${data.Coordinates}*
 
 > ${textbot} `;
