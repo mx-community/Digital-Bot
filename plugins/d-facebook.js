@@ -26,7 +26,7 @@ throw new Error(`Error en la API: ${response.status} - ${response.statusText}`)
 }
 
 const data = await response.json()
-console.log('📦 Respuesta de API:', data)
+//console.log('📦 Respuesta de API:', data)
 
 // Verificar diferentes estructuras de respuesta
 if (!data.status) {
@@ -54,7 +54,7 @@ console.log('📝 Título:', videoTitle)
 
 let tituloXd = `\t〨  *F A C E B O O K*
 
-\t⸭ ✅ ${videoTitle}`
+\t⸭ ✅ ${textbot}`
 await conn.sendMessage(m.chat, { video: { url: videoUrl }, caption: tituloXd }, { quoted: m })
 await m.react('✅')
 } catch (error) {
