@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-const handler = async (m, { conn, command, args usedPrefix, text }) => {
+const handler = async (m, { conn, command, args, usedPrefix, text }) => {
 const user = global.db.data.users[m.sender] || {};
 const name = await conn.getName(m.sender);
 
@@ -37,7 +37,7 @@ title: "々  D O N A T E  々",
 body: botname, 
 thumbnail: thumb, 
 sourceUrl: null, 
-mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m });
+mediaType: 1, renderLargerThumbnail: false }}}, { quoted: m });
 };
 
 if (command === "mp") {
