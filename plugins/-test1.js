@@ -8,7 +8,8 @@ let res = await fetch('https://api.waifu.pics/sfw/waifu')
 if (!res.ok) return
 let json = await res.json()
 if (!json.url) return 
-await conn.sendFile(m.chat, json.url, 'thumbnail.jpg', `Who?`, m)
+await conn.sendMessage(m.chat, { image: { url: json.url }, caption: "Xd" }, { quoted: m })
+  //conn.sendFile(m.chat, json.url, 'thumbnail.jpg', `Who?`, m)
 } catch {
 }}
 handler.help = ['waifu']
