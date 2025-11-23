@@ -7,13 +7,13 @@ if (command === "info" || command === "infobot") {
 let infoXd = `👋🏻 Hola usuario *@${name}*.
 Espero y estes bien.
 
-*${usedPrefix}creador*
+\t\t*${usedPrefix}creador*
 > ╰• Información del propietario del bot.
-*${usedPrefix}support*
+\t\t*${usedPrefix}support*
 > ╰• Envia mensaje de reporte, sugerencia o solicitud.
-*${usedPrefix}donate*
+\t\t*${usedPrefix}donate*
 > ╰• Donación voluntaria.
-*${usedPrefix}tyc*
+\t\t*${usedPrefix}tyc*
 > ╰• Terminos y condiciones.
 
 > ${textbot}`
