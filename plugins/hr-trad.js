@@ -18,7 +18,7 @@ text = args.join(' ')
 try {
 const result = await translate(`${text}`, { to: lang, autoCorrect: true })
 await conn.sendMessage(m.chat, { text: result.text }, { quoted: m })
-conn.reply(m.chat, result.text, m)
+//conn.reply(m.chat, result.text, m)
 } catch (error) {
 await conn.sendMessage(m.chat, { text: `📍  No se ha podido traducir el idioma.\n- Esto puede deberse a una falla en la api o un código no existente.` }, { quoted: m })
 try {
