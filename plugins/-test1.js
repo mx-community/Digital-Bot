@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-let handler = async (m, { conn, usedPrefix }) => {
+let handler = async (m, { conn, usedPrefix, command }) => {
 let who;
 
 if (m.mentionedJid.length > 0) {
