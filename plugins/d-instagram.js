@@ -1,23 +1,89 @@
 import fetch from 'node-fetch'
-let handler = async (m, { conn, usedPrefix, command, args }) => {
-if (!args[0]) return conn.sendMessage(m.chat, { text: `Ingrese el comando mas un enlace de un video de *Instagram* para descargarlo.` }, { quoted: m })
+let handler = async (m, { conn, usedPrefix, args }) => {
 try {
-let api = await fetch(`https://deliriussapi-oficial.vercel.app/download/instagram?url=${args[0]}`)
-let json = await api.json()
-let { data } = json
-let mbmd = data
-for (let i = 0; i < mbmd.length; i++) {
-let HFC = mbmd[i];
-if (HFC.type === "image") {
-await conn.sendMessage(m.chat, { image: { url: HFC.url } }, { quoted: m })
-} else if (HFC.type === "video") {
-await conn.sendMessage(m.chat, { video: { url: HFC.url } }, { quoted: m })
-}}
-} catch (error) {
-console.error(error)
-await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = ${error}` }, { quoted: m })
-}}
-handler.command = ["instagram", "ig"]
-export default handler
+if (!args[0]) {
+return conn.reply(m.chat,
+`Ingrese el comando mas un enlace de un video o imagen de *Instagram* para descargarlo.`,
+m)
+}
 
+const url = args[0]
+if (!url.match(/instagram\.com/)) {
+return conn.reply(m.chat,
+`📍  El enlace proporcionado no es valido.\n- Copie un enlace de un video de *Instagram*.`,
+m)
+}
+
+await m.react('⏰')
+
+const api1 = `https://mayapi.ooguy.com/instagram?url=${encodeURIComponent(url)}&apikey=may-f53d1d49`
+const api2 = `https://apiadonix.kozow.com/download/instagram?apikey=${global.apikey}&url=${encodeURIComponent(url)}`
+
+let mediaUrl, mediaTitle, mediaType, apiUsada = 'May API'
+
+
+try {
+const res = await fetch(api1, { timeout: 30000 })
+if (!res.ok) throw new Error('Error en API principal')
+const data = await res.json()
+
+if (data.result?.url) {
+mediaUrl = data.result.url
+mediaTitle = data.result.title || 'Contenido de Instagram'
+mediaType = data.result.type || 'video'
+} else if (data.url) {
+mediaUrl = data.url
+mediaTitle = data.title || 'Contenido de Instagram'
+mediaType = data.type || 'video'
+} else if (data.data?.url) {
+mediaUrl = data.data.url
+mediaTitle = data.data.title || 'Contenido de Instagram'
+mediaType = data.data.type || 'video'
+}
+} catch {
+
+apiUsada = 'API Adonix'
+const res2 = await fetch(api2, { timeout: 30000 })
+if (!res2.ok) throw new Error('Error en API de respaldo')
+const data2 = await res2.json()
+
+
+const adonixData = Array.isArray(data2.data) ? data2.data[0] : data2.data
+mediaUrl = adonixData?.url
+mediaTitle = 'Contenido de Instagram'
+mediaType = mediaUrl?.includes('.mp4') ? 'video' : 'image'
+}
+
+if (!mediaUrl) throw new Error('No se encontró contenido válido')
+
+const isVideo = mediaType === 'video' || mediaUrl.includes('.mp4')
+
+if (isVideo) {
+await conn.sendMessage(m.chat, {
+video: { url: mediaUrl },
+caption: `\t〨  *I N S T A G R A M*\n\n\t⸭ ✅ ${textbot}`
+}, { quoted: m })
+} else {
+await conn.sendMessage(m.chat, {
+image: { url: mediaUrl },
+caption: `\t〨  *I N S T A G R A M*\n\n\t⸭ ✅ ${textbot}`
+}, { quoted: m })
+}
+
+await m.react('✅')
+
+} catch (error) {
+console.error('❌ Error en descarga Instagram:', error)
+await conn.reply(m.chat,
+`📍 ${error.message}`,
+m)
+await m.react('❌')
+}
+}
+
+handler.help = ['ig']
+handler.tags = ['downloader']
+handler.command = ['ig', 'instagram', 'igdl']
+
+export default handler
 
