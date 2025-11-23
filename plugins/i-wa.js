@@ -17,7 +17,7 @@ Espero y estes bien.
 > ╰• Terminos y condiciones.
 
 > ${textbot}`
-await conn.reply(m.chat, { text: infoXd }, { quoted: m })
+await conn.reply(m.chat, { text: infoXd }, m)
 };
 
 if (command === "donate" || command === "donar") {
