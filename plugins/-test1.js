@@ -1,30 +1,49 @@
 import fetch from 'node-fetch'
 
-let handler = async (m, { conn, text }) => {
-  if (!text) return m.reply('[💖] Escribe algo para hablar con IA.')
+let handler = async (m, { conn, usedPrefix, command, text }) => {
 
-  const url = `https://api-adonix.ultraplus.click/ai/iavoz?apikey=${global.apikey}&q=${encodeURIComponent(text)}&voice=Esperanza`
+
+  if (!text) {
+    await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
+    return conn.reply(m.chat, `☕️ *Debes escribir tu modelo y tu pregunta*\nEjemplo: gpt-5-nano ¿Hola?`, m)
+  }
+
+  let args = text.split(' ')
+  let model = args.shift().toLowerCase()
+  const question = args.join(' ')
+
+  const modelosDisponibles = ['gpt-5-nano', 'claude', 'gemini', 'deepseek', 'grok', 'meta-ai', 'qwen']
+
+  if (!modelosDisponibles.includes(model)) {
+    await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
+    return conn.reply(m.chat, `🤖 *Modelo inválido*\nModelos disponibles: ${modelosDisponibles.join(', ')}`, m)
+  }
+
+  if (!question) {
+    await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
+    return conn.reply(m.chat, `☕️ *Escribe tu pregunta después del modelo*`, m)
+  }
 
   try {
-    const res = await fetch(url)
-    if (!res.ok) throw new Error('Error al generar el audio.')
+    await conn.sendMessage(m.chat, { react: { text: '💭', key: m.key } })
+    await conn.sendPresenceUpdate('composing', m.chat)
 
-    const audioBuffer = await res.arrayBuffer()
+    const response = await fetch(`https://api-adonix.ultraplus.click/ai/chat?apikey=${global.apikey}&q=${encodeURIComponent(question)}&model=${model}`)
+    const data = await response.json()
 
-    await conn.sendMessage(m.chat, {
-      audio: Buffer.from(audioBuffer),
-      mimetype: 'audio/mpeg',
-      ptt: false
-    }, { quoted: m })
+    if (!data.status || !data.reply) throw new Error('No se recibió respuesta de la API')
 
-  } catch (e) {
-    console.error(e)
-    m.reply('> 👾 Ocurrió un error al generar la voz.')
+    await conn.reply(m.chat, data.reply, m, ctxOk)
+    await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
+
+  } catch (err) {
+    await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
+    conn.reply(m.chat, `❌️ *Error:* ${err.message}`, m)
   }
 }
 
-handler.help = ['iavoz']
-handler.tags = ['ia']
-handler.command = ['iavoz']
+handler.help = ["ia", "ai"]
+handler.tags = ["ai"]
+handler.command = ["ia", "ai", "itsuki"]
 
 export default handler
