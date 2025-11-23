@@ -1,34 +1,27 @@
-import fetch from 'node-fetch'
+import fetch from "node-fetch";
 
-const handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) return conn.reply(m.chat, `🦋 Escribe el nombre del grupo a buscar.\nEj: *${usedPrefix + command} freefire*`, m)
-    await m.react('🕒') 
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+  if (!text) {
+    return conn.reply(m.chat, `🌸 ¡Hola! ¿cómo puedo ayudarte hoy?`, m, rcanal);
+  }
 
-    try {
-        const res = await fetch(`https://apiadonix.kozow.com/search/wpgroups?apikey=Adofreekey&q=${encodeURIComponent(text)}`)
-        const json = await res.json()
-        
-        if (!json.status || !json.data || json.data.length === 0) {
-            return conn.reply(m.chat, `No encontré grupos con: *${text}*`, m)
-        }
+  try {
+    const url = `https://api.kirito.my/api/chatgpt?q=${encodeURIComponent(text)}&apikey=by_deylin`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-        
-        let message = `❤️ *Resultados de grupos para:* *${text}*\n\n`
-        json.data.slice(0, 10).forEach((g, i) => {
-            message += `「🌻」 Busca *<${g.name}>*\n`
-            message += `> 🐝 Link » ${g.link}\n\n`
-        })
-
-        conn.sendMessage(m.chat, { text: message }, { quoted: m })
-        
-    } catch (e) {
-        console.error(e)
-        conn.reply(m.chat, '> Ocurrió un error buscando los grupos', m)
+    if (!data || !data.response) {
+      return conn.reply(m.chat, "❌ No recibí respuesta de la IA, intenta de nuevo.", m, fake);
     }
-}
 
-handler.command = ['wpgroups']
-handler.tags = ['buscador']
-handler.help = ['wpgroups']
-export default handler
-         
+    await conn.reply(m.chat, `${data.response}`, m, rcanal);
+  } catch (e) {
+    console.error(e);
+    await conn.reply(m.chat, "⚠️ Hubo un error al conectar con la IA.", m, fake);
+  }
+};
+
+handler.tags = ["ia"];
+handler.command = handler.help =['gpt', 'chatgpt']
+
+export default handler;
