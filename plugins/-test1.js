@@ -1,27 +1,30 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch'
 
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) {
-    return conn.reply(m.chat, `🌸 ¡Hola! ¿cómo puedo ayudarte hoy?`, m, rcanal);
-  }
+let handler = async (m, { conn, text }) => {
+  if (!text) return m.reply('[💖] Escribe algo para hablar con IA.')
+
+  const url = `https://api-adonix.ultraplus.click/ai/iavoz?apikey=${global.apikey}&q=${encodeURIComponent(text)}&voice=Esperanza`
 
   try {
-    const url = `https://api.kirito.my/api/chatgpt?q=${encodeURIComponent(text)}&apikey=by_deylin`;
-    const res = await fetch(url);
-    const data = await res.json();
+    const res = await fetch(url)
+    if (!res.ok) throw new Error('Error al generar el audio.')
 
-    if (!data || !data.response) {
-      return conn.reply(m.chat, "❌ No recibí respuesta de la IA, intenta de nuevo.", m, fake);
-    }
+    const audioBuffer = await res.arrayBuffer()
 
-    await conn.reply(m.chat, `${data.response}`, m, rcanal);
+    await conn.sendMessage(m.chat, {
+      audio: Buffer.from(audioBuffer),
+      mimetype: 'audio/mpeg',
+      ptt: false
+    }, { quoted: m })
+
   } catch (e) {
-    console.error(e);
-    await conn.reply(m.chat, "⚠️ Hubo un error al conectar con la IA.", m, fake);
+    console.error(e)
+    m.reply('> 👾 Ocurrió un error al generar la voz.')
   }
-};
+}
 
-handler.tags = ["ia"];
-handler.command = handler.help =['gpt', 'chatgpt']
+handler.help = ['iavoz']
+handler.tags = ['ia']
+handler.command = ['iavoz']
 
-export default handler;
+export default handler
