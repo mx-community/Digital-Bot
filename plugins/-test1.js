@@ -28,7 +28,7 @@ str = `\`${name2}\` *se golpeó a sí mismo.*`.trim();
 }
 
 if (m.isGroup) { 
-punch = [ 'https://telegra.ph/file/8e60a6379c1b72e4fbe0f.mp4', 'https://telegra.ph/file/8ac9ca359cac4c8786194.mp4', 'https://telegra.ph/file/cc20935de6993dd391af1.mp4', 'https://telegra.ph/file/9c0bba4c6b71979e56f55.mp4', 'https://telegra.ph/file/5d22649b472e539f27df9.mp4', 'https://telegra.ph/file/804eada656f96a04ebae8.mp4', 'https://telegra.ph/file/3a2ef7a12eecbb6d6df53.mp4', 'https://telegra.ph/file/c4c27701496fec28d6f8a.mp4', 'https://telegra.ph/file/c8e5a210a3a34e23391ee.mp4', 'https://telegra.ph/file/70bac5a760539efad5aad.mp4' ];
+let punch = [ 'https://telegra.ph/file/8e60a6379c1b72e4fbe0f.mp4', 'https://telegra.ph/file/8ac9ca359cac4c8786194.mp4', 'https://telegra.ph/file/cc20935de6993dd391af1.mp4', 'https://telegra.ph/file/9c0bba4c6b71979e56f55.mp4', 'https://telegra.ph/file/5d22649b472e539f27df9.mp4', 'https://telegra.ph/file/804eada656f96a04ebae8.mp4', 'https://telegra.ph/file/3a2ef7a12eecbb6d6df53.mp4', 'https://telegra.ph/file/c4c27701496fec28d6f8a.mp4', 'https://telegra.ph/file/c8e5a210a3a34e23391ee.mp4', 'https://telegra.ph/file/70bac5a760539efad5aad.mp4' ];
 const video = punch[Math.floor(Math.random() * punch.length)];
 let mentions = [who];
 conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
@@ -47,8 +47,6 @@ str = `\`${name2}\` *se beso a sí mismo/a.*`.trim();
 
 if (m.isGroup) { 
 let kiss = [ 'https://media.tenor.com/_8oadF3hZwIAAAPo/kiss.mp4', 'https://media.tenor.com/cQzRWAWrN6kAAAPo/ichigo-hiro.mp4', 'https://media.tenor.com/kmxEaVuW8AoAAAPo/kiss-gentle-kiss.mp4', 'https://media.tenor.com/NO6j5K8YuRAAAAPo/leni.mp4', 'https://media.tenor.com/xYUjLVz6rJoAAAPo/mhel.mp4', 'https://media.tenor.com/ZDqsYLDQzIUAAAPo/shirayuki-zen-kiss-anime.mp4', 'https://media.tenor.com/LrKmxrDxJN0AAAPo/love-cheek.mp4', 'https://media.tenor.com/lyuW54_wDU0AAAPo/kiss-anime.mp4' ];
-
-punch = [ 'https://telegra.ph/file/8e60a6379c1b72e4fbe0f.mp4', 'https://telegra.ph/file/8ac9ca359cac4c8786194.mp4', 'https://telegra.ph/file/cc20935de6993dd391af1.mp4', 'https://telegra.ph/file/9c0bba4c6b71979e56f55.mp4', 'https://telegra.ph/file/5d22649b472e539f27df9.mp4', 'https://telegra.ph/file/804eada656f96a04ebae8.mp4', 'https://telegra.ph/file/3a2ef7a12eecbb6d6df53.mp4', 'https://telegra.ph/file/c4c27701496fec28d6f8a.mp4', 'https://telegra.ph/file/c8e5a210a3a34e23391ee.mp4', 'https://telegra.ph/file/70bac5a760539efad5aad.mp4' ];
 const video = kiss[Math.floor(Math.random() * kiss.length)];
 let mentions = [who];
 conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
