@@ -131,13 +131,13 @@ global.db.data.settings[this.user.jid] = {}
 if (settings) {
 if (!("self" in settings)) settings.self = false
 if (!("restrict" in settings)) settings.restrict = true
-if (!("jadibotmd" in settings)) settings.jadibotmd = false
+if (!("jadibotmd" in settings)) settings.jadibotmd = true
 if (!("antiPrivate" in settings)) settings.antiPrivate = false
 if (!("gponly" in settings)) settings.gponly = false
 } else global.db.data.settings[this.user.jid] = {
 self: false,
 restrict: true,
-jadibotmd: false,
+jadibotmd: true,
 antiPrivate: false,
 gponly: false
 }} catch (e) {
