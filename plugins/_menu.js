@@ -455,7 +455,7 @@ let menu10 = `🜲 Usuario : @${name}
 ⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
 
-\t\t⚶ 📍\`\`\`Busquedas:
+\t\t⚶ 📍\`\`\`Sistemas:
 #temblor   »
 #pais      » <text>
 #clima     » <text>\`\`\`
