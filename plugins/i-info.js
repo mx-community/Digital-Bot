@@ -15,20 +15,6 @@ const usertag = Array.from(new Set([...text.matchAll(/@(\d{5,})/g)]), m => `${m[
 const chatLabel = m.isGroup ? (await conn.getName(m.chat) || 'Grupal') : 'Privado'
 const horario = `${moment.tz('America/Caracas').format('DD/MM/YYYY hh:mm:ss A')}`
 switch (command) {
-case 'speedtest': case 'stest': {
-await conn.sendMessage(m.chat, { text: `Verificando velocidad, espere un momento...` }, { quoted: m })
-const o = await exec('python3 ./lib/ookla-speedtest.py --secure --share')
-const { stdout, stderr } = o
-if (stdout.trim()) {
-const url = stdout.match(/http[^"]+\.png/)?.[0]
-if (url) await conn.sendMessage(m.chat, { image: { url }, caption: stdout.trim() }, { quoted: m })
-}
-if (stderr.trim()) {
-const url2 = stderr.match(/http[^"]+\.png/)?.[0]
-if (url2) await conn.sendMessage(m.chat, { image: { url: url2 }, caption: stderr.trim() }, { quoted: m })
-}
-break
-}
 case 'fixmsg': case 'ds': {
 if (global.conn.user.jid !== conn.user.jid)
 return conn.sendMessage(m.chat, { text: `📍  Este comando solo funciona en el numero principal del bot.` }, { quoted: m })
@@ -54,6 +40,6 @@ await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = Command erro
 
 handler.help = ['suggest', 'reporte', 'invite', 'speedtest', 'fixmsg', 'script']
 handler.tags = ['main']
-handler.command = ['speedtest', 'stest', 'fixmsg', 'ds']
+handler.command = ['fixmsg', 'ds']
 
 export default handler
