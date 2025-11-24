@@ -25,7 +25,7 @@ try {
 const lol = await fetch(`https://api.lolhuman.xyz/api/translate/auto/${lang}?apikey=${lolkeysapi}&text=${text}`)
 const loll = await lol.json()
 const result2 = loll.result.translated
-await conn.sendMessage(m.chat, { text: result2 }, { quoted: m })
+//await conn.sendMessage(m.chat, { text: result2 }, { quoted: m })
 } catch (error) {
 await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = Command error, try again and if the error persists, report the command.` }, { quoted: m })
 }}}
