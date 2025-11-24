@@ -20,6 +20,17 @@ Espero y estes bien.
 await conn.reply(m.chat, infoXd, m)
 };
 
+if (command === "canal" || command === "channel") {
+let infoXd = `\t〨  *C A N A L  :  M X*
+
+\t⸭ 📍  Hola usuario *@${name}*, espero y estes bien, este es nuestro canal, nuevo y reciente.
+
+🌐 ${global.canal}
+
+> ${textbot}`
+await conn.reply(m.chat, infoXd, m)
+};
+  
 if (command === "donate" || command === "donar") {
 const thumb = Buffer.from(await (await fetch(`${global.mMages}`)).arrayBuffer())
 let donaXd = `\t〨  *D O N A T E*
@@ -101,7 +112,7 @@ await conn.sendMessage(m.chat, { text: `✓  Se ha enviado tu sugerencia a los d
 
 };
 
-handler.command = ['info', 'infobot', 'donate', 'donar', 'mp', 'bk', 'pay', 'creador', 'tyc', 'terminos', 'support', 'soporte'];
+handler.command = ['info', 'infobot', 'canal', 'channel', 'donate', 'donar', 'mp', 'bk', 'pay', 'creador', 'tyc', 'terminos', 'support', 'soporte'];
 
 export default handler;
   
