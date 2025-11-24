@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+/*import { promises as fs } from 'fs';
 
 import { cooldowns as cooldowns } from '../plugins/roles-start.js';
 import { cooldowns as cooldowns } from '../plugins/roles-claim.js';
@@ -82,4 +82,4 @@ handler.command = ['infogacha', 'ginfo', 'gachainfo'];
 handler.group = true;
 
 export default handler;
-  
+  */
