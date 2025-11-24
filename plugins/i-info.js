@@ -48,27 +48,12 @@ break
 conn.sendMessage(m.chat, { text: `${count === 0 ? '✓  No se han encontrado archivos duplicados para eliminar.' : `✓  Se han eliminado *${count}* archivos duplicados con exito.`}` }, { quoted: m })
 break
 }
-case 'main': case 'internet': {
-await conn.sendMessage(m.chat, { text: `Enviando información variable, espere un momento...` }, { quoted: m })
-const res = await fetch('https://api.github.com/repos/Shadow-nex/KanekiBot-V3')
-if (!res.ok) throw new Error('No se pudo obtener los datos del repositorio.')
-const json = await res.json()
-const txt = `「 *Main : Info* 」
-
-⧁ *Instagram:* ++++++
-⧁ *Facebook* ++++++
-⧁ *Twitter* ++++++
-⧁ *WhatsApp:* ++++++
-⧁ *Telegram:* ++++++`
-await conn.sendMessage(m.chat, { image: catalogo, caption: txt }, { quoted: m })
-
-break
-}}} catch (err) {
+}} catch (err) {
 await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = Command error, try again and if the error persists, report the command.` }, { quoted: m })
 }}
 
 handler.help = ['suggest', 'reporte', 'invite', 'speedtest', 'fixmsg', 'script']
 handler.tags = ['main']
-handler.command = ['speedtest', 'stest', 'fixmsg', 'ds', 'internet', 'main']
+handler.command = ['speedtest', 'stest', 'fixmsg', 'ds']
 
 export default handler
