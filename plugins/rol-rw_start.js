@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs'
+/*import { promises as fs } from 'fs'
 
 const charactersFilePath = './src/database/personajes.json'
 const cooldowns = {}
@@ -113,3 +113,4 @@ handler.command = ['rw', 'rollwaifu']
 handler.group = true
 
 export default handler
+*/
