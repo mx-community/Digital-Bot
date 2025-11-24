@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+/*import { promises as fs } from 'fs';
 
 const charactersFilePath = './src/database/personajes.json'
 const haremFilePath = './src/database/reclamados.json'
@@ -46,7 +46,7 @@ let handler = async (m, { conn }) => {
     if (m.quoted && m.quoted.sender === conn.user.jid) {
         try {
             const characters = await loadCharacters();
-            const characterIdMatch = m.quoted.text.match(/💾 ID: \*(.+?)\*/);
+            const characterIdMatch = m.quoted.text.match(/💾 ID: \*(.+?)\
 
             if (!characterIdMatch) {
                 await conn.reply(m.chat, '📍  No se ha podido acceder al *ID* del personaje.\n- Si el error persiste, reporta el comando con *#support*.', m);
@@ -125,4 +125,4 @@ handler.tags = ['gacha'];
 handler.command = ['c', 'claim'];
 handler.group = true;
 
-export default handler;
+export default handler;*/
