@@ -29,7 +29,6 @@ const weatherMessage = `*CLIMA  -  ACTUAL*
 📌 *Ubicacion:* ${location}
 🌎 *Pais:* ${country}
 🌐 *Provincia:* ${weatherDescription}
-📆 *Fecha:* ${botdate}
 🌡️ *Temperatura actual:* ${currentTemperature}
 🚀 *Máxima:* ${maxTemperature}
 🛰️ *Mínima:* ${minTemperature}
