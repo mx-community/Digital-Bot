@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+/*import { promises as fs } from 'fs';
 
 const charactersFilePath = './src/database/personajes.json';
 const haremFilePath = './src/database/reclamados.json';
@@ -73,3 +73,4 @@ handler.group = true;
 export default handler;
 
   
+*/
