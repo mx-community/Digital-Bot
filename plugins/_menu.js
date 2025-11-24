@@ -26,7 +26,7 @@ const hora = `${moment.tz('America/Buenos_Aires').format('HH:mm:ss')}`
 const totalCommands = Object.keys(global.plugins).length
 const userId = m.sender.split('@')[0]
 const phone = PhoneNumber('+' + userId)
-const pais = phone.getRegionCode() || 'Desconocido 🌐'
+const pais = phone.getRegionCode() || 'Desconocido'
 const perfil = await conn.profilePictureUrl(conn.user.jid, 'image').catch(() => `${global.mMages}`)
 
 await m.react('👋🏻')
@@ -53,444 +53,415 @@ let menu = `> ${hora}, ${dia} ${fechaTxt}
 
 \t⚶ Por ejemplo:
 *#menu all*`
-return conn.sendMessage(m.chat, { text: menu, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
+return conn.sendMessage(m.chat, { text: menu, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: false }}}, { quoted: m })
 } else if (args[0] === '1' || args[0] === 'info') {
-let menu1 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+let menu1 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-╭───[ ⛉ INFORMACIÓN ⛉ ]─•
-│#addnew   │✎ query.
-│#addnew2  │✎ query.
-│#info     │
-│#ping     │
-│#status   │
-│#ds       │
-│#main     │
-│#mp       │
-│#bk       │
-╰─────────────────•
-\`\`\`
+
+\t\t⚶ 📍\`\`\`Informacion:
+#support   <text>
+#alquilar
+#terminos <text>
+#creador
+#ping
+#canal
+#status
+#infobot
+#donate
+#ds
+#mp
+#bk
+#pay\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu1, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "descargas" || args[0] === "2") {
-let menu2 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+let menu2 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-╭───[ ⛉ DESCARGAS ⛉ ]─•
-│#github   │✎ link.
-│#apk      │✎ texto.
-│#facebook │✎ link.
-│#instagram│✎ link.
-│#likee    │✎ link.
-│#play     │✎ texto, link.
-│#mediafire│✎ link.
-│#twitter  │✎ link.
-│#tiktok   │✎ link.
-│#pinterest│✎ link.
-╰─────────────────•
-\`\`\`
 
-${textbot}
+\t\t⚶ 📍\`\`\`Descargas:
+#github   <link>
+#apk      <text>
+#facebook <link>.
+#instagram <link>.
+#play     <text o link>
+#mediafire<link>
+#twitter  <link>
+#tiktok   <link>
+#a-tiktok <link>
+#p-tiktok <link>
+#pinterest <link>\`\`\`
+
+> ${textbot}
 `
 return conn.sendMessage(m.chat, { text: menu2, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "grupos" || args[0] === "3") {
-let menu3 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+let menu3 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-╭───[ ⛉ GRUPOS ⛉ ]─•
-│#add      │✎ número.
-│#kick     │✎ mention.
-│#delete   │✎ meply.
-│#promote  │✎ mention.
-│#demote   │✎ mention.
-│#warn     │✎ mention.
-│#unwarn   │✎ mention.
-│#g-img    │✎ reply.
-│#g-name   │✎ texto.
-│#g-desc   │✎ texto.
-│#g-welcome│✎ texto.
-│#link     │
-╰─────────────────•
-\`\`\`
+
+\t\t⚶ 📍 \`\`\`Para grupos:
+#add  <nro>
+#kick     <reply>
+#delete   <reply>
+#promote  <reply>
+#demote   <reply>
+#warn     <reply>
+#unwarn  <reply>
+#g-img   <reply>
+#g-name   <texto>
+#g-desc   <texto>
+#g-welcome <texto>
+#d-bay <texto>
+#link\`\`\`
 
 > ${textbot}
 `
 return conn.sendMessage(m.chat, { text: menu3, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "rpg" || args[0] === "4") {
-let menu4 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+let menu4 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-╭───[ ⛉ RPG GAME ⛉ ]─•
-│#cofre    │
-│#lb       │
-│#levelup  │
-│#minar    │
-│#work     │
-│#wallet   │
-│#heal     │
-│#fishing  │
-│#dep      │✎ query.
-│#dep2     │✎ query.
-│#ret      │✎ query.
-│#ret2     │✎ query.
-╰─────────────────•
-\`\`\`
+
+\t\t⚶ 📍\`\`\`Juegos rpg:
+#lb 
+#cofre
+#levelup 
+#work 
+#fishing
+#mining
+#ret <query>
+#ret2 <query>
+#dep <query>
+#dep2 <query>
+#give <query>
+#give2 <texto>\`\`\`
 
 > ${textbot}
 `
 return conn.sendMessage(m.chat, { text: menu4, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
-} else if (args[0] === "settings" || args[0] === "5") {
-let menu5 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+} else if (args[0] === "ajustes" || args[0] === "5") {
+let menu5 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-╭───[ ⛉ SETTINGS ⛉ ]─•
-│#hweb     │✎ link.
-│#ofuscar  │✎ query.
-│#lid      │
-│#hd       │✎ reply.
-│#webcapt  │✎ link.
-│#pais     │✎ country.
-│#cid      │✎ link.
-│#trad     │✎ code+text.
-╰─────────────────•
-\`\`\`
+
+\t\t⚶ 📍\`\`\`Ajustes:
+#hweb <link>
+#lid
+#getpic <mention>
+#hd <query>
+#cid <link>
+#trad <texto>
+#calc <query>\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu5, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "logos" || args[0] === "6") {
-let menu6 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+let menu6 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-╭───[ ⛉ LOGOS ⛉ ]─•
-│#logo1    │✎ text.
-│#logo2    │✎ text.
-│#logo3    │✎ text.
-│#logo4    │✎ text.
-│#logo5    │✎ text.
-│#logo6    │✎ text.
-│#logo7    │✎ text.
-│#logo8    │✎ text.
-│#logo9    │✎ text.
-│#logo10   │✎ text.
-│#logo11   │✎ text.
-│#logo12   │✎ text.
-│#logo13   │✎ text.
-│#logo14   │✎ text.
-│#logo15   │✎ text.
-│#logo16   │✎ text.
-│#logo17   │✎ text.
-│#logo18   │✎ text.
-│#logo19   │✎ text.
-│#logo20   │✎ text.
-│#logo21   │✎ text.
-│#logo22   │✎ text.
-│#logo23   │✎ text.
-│#logo24   │✎ text.
-│#logo25   │✎ text.
-│#logo26   │✎ text.
-│#logo27   │✎ text.
-│#logo28   │✎ text.
-│#logo29   │✎ text.
-│#logo30   │✎ text.
-│#logo31   │✎ text.
-│#logo32   │✎ text.
-│#logo33   │✎ text.
-│#logo34   │✎ text.
-│#logo35   │✎ text.
-│#logo36   │✎ text.
-│#logo37   │✎ text.
-╰─────────────────•
+
+\t\t⚶ 📍\`\`\`Crear logos:
+#logo1    <texto>
+#logo2    <texto>
+#logo3    <texto>
+#logo4    <texto>
+#logo5    <texto>
+#logo6    <texto>
+#logo7    <texto>
+#logo8    <texto>
+#logo9    <texto>
+#logo10   <texto>
+#logo11   <texto>
+#logo12   <texto>
+#logo13   <texto>
+#logo14   <texto>
+#logo15   <texto>
+#logo16   <texto>
+#logo17   <texto>
+#logo18   <texto>
+#logo19   <texto>
+#logo20   <texto>
+#logo21   <texto>
+#logo22   <texto>
+#logo23   <texto>
+#logo24   <texto>
+#logo25   <texto>
+#logo26   <texto>
+#logo27   <texto>
+#logo28   <texto>
+#logo29   <texto>
+#logo30   <texto>
+#logo31   <texto>
+#logo32   <texto>
+#logo33   <texto>
+#logo34   <texto>
+#logo35   <texto>
+#logo36   <texto>
+#logo37   <texto>
 \`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu6, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "perfil" || args[0] === "7") {
-let menu7 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+let menu7 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-╭───[ ⛉ PROFILE ⛉ ]─•
-│#perfil   │
-│#pf-genero│✎ text.
-│#d-genero │
-│#pf-cumple│✎ query.
-│#d-cumple │
-│#pf-desc  │✎ text.
-│#d-desc   │
-│#verify   │✎ query.
-│#dreg     │✎ code.
-│#mycode   │
-╰─────────────────•
-\`\`\`
+
+\t\t⚶ 📍\`\`\`Perfil:
+#perfil   
+#myp  
+#registro <query>
+#mycode
+#dreg <code>
+#p-genero <texto>
+#d-genero 
+#p-cumple <texto>
+#d-cumple 
+#p-desc  <texto>
+#d-desc   
+#p-age <nro>\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu7, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "search" || args[0] === "8") {
-let menu8 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+let menu8 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-╭───[ ⛉ SEARCH ⛉ ]─•
-│#tiktoks  │✎ text.
-│#yts      │✎ text.
-│#imagen   │✎ text.
-│#spotifys │✎ text.
-│#slys     │✎ text.
-│#apples   │✎ text.
-│#capcuts  │✎ text.
-│#sounds   │✎ text.
-│#tenor    │✎ text.
-╰─────────────────•
+
+\t\t⚶ 📍\`\`\`Busquedas:
+#tiktoks  <texto>
+#imagen   <texto>
+#spotifys  <texto>
+#apples   <texto>
+#capcuts  <texto>
+#sounds  <texto>
 \`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu8, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "stickers" || args[0] === "9") {
-let menu9 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+let menu9 = `╭🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-╭───[ ⛉ STICKERS ⛉ ]─•
-│#sticker  │✎ reply.
-│#brat     │✎ text.
-│#emojix   │✎ emoji+emoji.
-│#qc       │✎ text.
-│#exif     │✎ text.
-│#d-exif   │
-╰─────────────────•
-\`\`\`
+
+\t\t⚶ 📍\`\`\`Stickers:
+#sticker  <reply>
+#brat     <texto>
+#emojix   <query>
+#qc       <text>
+#exif    <text>
+#d-exif\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu9, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "tools" || args[0] === "10") {
-let menu10 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+let menu10 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
-\`\`\`
-📍  El menu sigue en proceso, use otra categoria..
-\`\`\`
+
+\t\t⚶ 📍\`\`\`Convertidores:
+#upload
+#turl <reply>
+#catbox <reply>
+#timg <reply>
+#tgif <reply>
+#tmp3 <reply>
+#tvid <reply>\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu10, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "completo" || args[0] === "all" || args[0] === "0") {
 let menuAll = `${hora}, ${dia} ${fechaTxt}
 
-╭──────────────• · · · 
-│🜲 *Usuario:* @${name} (Prem. ${premium})
-│ⴵ *Actividad:* ${uptime} (Vs. ${vs})
-│⚇ *Bot:* ${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'PreBot')}
-╰──────────────• · · · 
-
-\`\`\`
-╭───[ ⛉ INFORMACIÓN ⛉ ]─•
-│#addnew   │✎ query.
-│#addnew2  │✎ query.
-│#info     │
-│#ping     │
-│#status   │
-│#ds       │
-│#main     │
-│#mp       │
-│#bk       │
-╰─────────────────•
+🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
 
-╭───[ ⛉ DESCARGAS ⛉ ]─•
-│#github   │✎ link.
-│#apk      │✎ texto.
-│#facebook │✎ link.
-│#instagram│✎ link.
-│#likee    │✎ link.
-│#play     │✎ texto, link.
-│#mediafire│✎ link.
-│#twitter  │✎ link.
-│#tiktok   │✎ link.
-│#pinterest│✎ link.
-╰─────────────────•
+\`\`\`⚶ INFORMACIÓN •
+#support   <text>
+#alquilar
+#terminos <text>
+#creador
+#ping
+#canal
+#status
+#infobot
+#donate
+#ds
+#mp
+#bk
+#pay
 
 
-╭───[ ⛉ GRUPOS ⛉ ]─•
-│#add      │✎ número.
-│#kick     │✎ mention.
-│#delete   │✎ meply.
-│#promote  │✎ mention.
-│#demote   │✎ mention.
-│#warn     │✎ mention.
-│#unwarn   │✎ mention.
-│#g-img    │✎ reply.
-│#g-name   │✎ texto.
-│#g-desc   │✎ texto.
-│#g-welcome│✎ texto.
-│#link     │
-╰─────────────────•
+⚶ DESCARGAS •
+#github   <link>
+#apk      <text>
+#facebook <link>.
+#instagram <link>.
+#play     <text o link>
+#mediafire<link>
+#twitter  <link>
+#tiktok   <link>
+#a-tiktok <link>
+#p-tiktok <link>
+#pinterest <link>
 
 
-╭───[ ⛉ RPG GAME ⛉ ]─•
-│#cofre    │
-│#lb       │
-│#levelup  │
-│#minar    │
-│#work     │
-│#wallet   │
-│#heal     │
-│#fishing  │
-│#dep      │✎ query.
-│#dep2     │✎ query.
-│#give     │✎ query.
-│#give2    │✎ query.
-│#ret      │✎ query.
-│#ret2     │✎ query.
-╰─────────────────•
+⚶ PARA GRUPOS •
+#add  <nro>
+#kick     <reply>
+#delete   <reply>
+#promote  <reply>
+#demote   <reply>
+#warn     <reply>
+#unwarn  <reply>
+#g-img   <reply>
+#g-name   <texto>
+#g-desc   <texto>
+#g-welcome <texto>
+#d-bay <texto>
+#link
 
 
-╭───[ ⛉ SETTINGS ⛉ ]─•
-│#hweb     │✎ link.
-│#ofuscar  │✎ query.
-│#lid      │
-│#hd       │✎ reply.
-│#webcapt  │✎ link.
-│#pais     │✎ country.
-│#cid      │✎ link.
-│#trad     │✎ code+text.
-╰─────────────────•
+⚶ JUEGOS RPG •
+#lb 
+#cofre
+#levelup 
+#work 
+#fishing
+#mining
+#ret <query>
+#ret2 <query>
+#dep <query>
+#dep2 <query>
+#give <query>
+#give2 <texto>
 
 
-╭───[ ⛉ LOGOS ⛉ ]─•
-│#logo1    │✎ text.
-│#logo2    │✎ text.
-│#logo3    │✎ text.
-│#logo4    │✎ text.
-│#logo5    │✎ text.
-│#logo6    │✎ text.
-│#logo7    │✎ text.
-│#logo8    │✎ text.
-│#logo9    │✎ text.
-│#logo10   │✎ text.
-│#logo11   │✎ text.
-│#logo12   │✎ text.
-│#logo13   │✎ text.
-│#logo14   │✎ text.
-│#logo15   │✎ text.
-│#logo16   │✎ text.
-│#logo17   │✎ text.
-│#logo18   │✎ text.
-│#logo19   │✎ text.
-│#logo20   │✎ text.
-│#logo21   │✎ text.
-│#logo22   │✎ text.
-│#logo23   │✎ text.
-│#logo24   │✎ text.
-│#logo25   │✎ text.
-│#logo26   │✎ text.
-│#logo27   │✎ text.
-│#logo28   │✎ text.
-│#logo29   │✎ text.
-│#logo30   │✎ text.
-│#logo31   │✎ text.
-│#logo32   │✎ text.
-│#logo33   │✎ text.
-│#logo34   │✎ text.
-│#logo35   │✎ text.
-│#logo36   │✎ text.
-│#logo37   │✎ text.
-╰─────────────────•
+⚶ AJUSTES •
+#hweb <link>
+#lid
+#getpic <mention>
+#hd <query>
+#cid <link>
+#trad <texto>
+#calc <query>
 
 
-╭───[ ⛉ PROFILE ⛉ ]─•
-│#perfil   │
-│#pf-genero│✎ text.
-│#d-genero │
-│#pf-cumple│✎ query.
-│#d-cumple │
-│#pf-desc  │✎ text.
-│#d-desc   │
-│#verify   │✎ query.
-│#dreg     │✎ code.
-│#mycode   │
-╰─────────────────•
+⚶ CREAR LOGOS •
+#logo1    <texto>
+#logo2    <texto>
+#logo3    <texto>
+#logo4    <texto>
+#logo5    <texto>
+#logo6    <texto>
+#logo7    <texto>
+#logo8    <texto>
+#logo9    <texto>
+#logo10   <texto>
+#logo11   <texto>
+#logo12   <texto>
+#logo13   <texto>
+#logo14   <texto>
+#logo15   <texto>
+#logo16   <texto>
+#logo17   <texto>
+#logo18   <texto>
+#logo19   <texto>
+#logo20   <texto>
+#logo21   <texto>
+#logo22   <texto>
+#logo23   <texto>
+#logo24   <texto>
+#logo25   <texto>
+#logo26   <texto>
+#logo27   <texto>
+#logo28   <texto>
+#logo29   <texto>
+#logo30   <texto>
+#logo31   <texto>
+#logo32   <texto>
+#logo33   <texto>
+#logo34   <texto>
+#logo35   <texto>
+#logo36   <texto>
+#logo37   <texto>
 
 
-╭───[ ⛉ SEARCH ⛉ ]─•
-│#tiktoks  │✎ text.
-│#yts      │✎ text.
-│#imagen   │✎ text.
-│#spotifys │✎ text.
-│#slys     │✎ text.
-│#apples   │✎ text.
-│#capcuts  │✎ text.
-│#sounds   │✎ text.
-│#tenor    │✎ text.
-╰─────────────────•
+⚶ PERFIL •
+#perfil   
+#myp  
+#registro <query>
+#mycode
+#dreg <code>
+#p-genero <texto>
+#d-genero 
+#p-cumple <texto>
+#d-cumple 
+#p-desc  <texto>
+#d-desc   
+#p-age <nro>
 
 
-╭───[ ⛉ STICKERS ⛉ ]─•
-│#sticker  │✎ reply.
-│#brat     │✎ text.
-│#emojix   │✎ emoji+emoji.
-│#qc       │✎ text.
-│#exif     │✎ text.
-│#d-exif   │
-╰─────────────────•
+⚶ BUSQUEDAS •
+#tiktoks  <texto>
+#imagen   <texto>
+#spotifys  <texto>
+#apples   <texto>
+#capcuts  <texto>
+#sounds  <texto>
 
 
-╭───[ ⛉ ROLL WAIFU ⛉ ]─•
-│#herencia │✎ query.
-│#c        │✎ reply.
-│#winfo    │✎ query.
-│#wadd     │✎ query.
-│#rvote    │✎ query.
-│#iw       │
-│#ginfo    │
-│#rw       │
-╰─────────────────•\`\`\`
+⚶ STICKERS •
+#sticker  <reply>
+#brat     <texto>
+#emojix   <query>
+#qc       <text>
+#exif    <text>
+#d-exif
+
+
+⚶ CONVERTIDORES •
+#upload
+#turl <reply>
+#catbox <reply>
+#timg <reply>
+#tgif <reply>
+#tmp3 <reply>
+#tvid <reply>
+
+
+⚶ SISTEMA •
+#temblor
+#pais <text>
+#clima <text>\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menuAll, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
-} else if (args[0] === "rw" || args[0] === "11") {
-let menu10 = `╭──────────────• · · · 
-│🜲 *Usuario:* @${name} *(Prem: ${premium})*
-│々 *Versión:* ${vs} / ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal.' : 'Servidor.')}
-╰──────────────• · · · 
+} else if (args[0] === "sistema" || args[0] === "11") {
+let menu10 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
 
-\`\`\`╭───[ ⛉ ROLL WAIFU ⛉ ]─•
-│#herencia │✎ query.
-│#c        │✎ reply.
-│#winfo    │✎ query.
-│#wadd     │✎ query.
-│#rvote    │✎ query.
-│#iw       │
-│#ginfo    │
-│#rw       │
-╰─────────────────•\`\`\`
-
+\t\t⚶ 📍\`\`\`Busquedas:
+#temblor
+#pais <text>
+#clima <text>\`\`\`
 
 > ${textbot}`
  return conn.sendMessage(m.chat, { text: menu10, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
@@ -515,7 +486,7 @@ const h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
 const m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
 const s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
 return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':')
- }
+}
  
 /*
 ╭───[ ⛉ PROPIETARIO ⛉ ]─•
