@@ -11,15 +11,15 @@ let buffer = Buffer.from([])
 for await (const chunk of media) {
 buffer = Buffer.concat([buffer, chunk])}
 if (/video/.test(type)) {
-let xdV = `〆  ANTI  :  VIEWONCE
+let xdV = `\t〨  ANTI  :  VIEWONCE
 \t\t𝇈 📍 \`\`\`No se admite ocultar videos.\`\`\`
 
 \t⚶ Titulo : *${msg[type].caption || "Undefined."}*
 `
 return this.sendFile(m.chat, buffer, 'error.mp4', xdV, m)
 } else if (/image/.test(type)) {
-let xdI = `〆  ANTI  :  VIEWONCE
-𝇈 📍 \`\`\`No se admite ocultar imagenes.\`\`\`
+let xdI = `\t〨  ANTI  :  VIEWONCE
+\t\t𝇈 📍 \`\`\`No se admite ocultar imagenes.\`\`\`
 
 \t⚶ Titulo : *${msg[type].caption || "Undefined."}*`
 return this.sendFile(m.chat, buffer, 'error.jpg', xdI, m)
@@ -29,4 +29,4 @@ function formatFileSize(bytes) {
 const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'TY', 'EY']
 const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
 return Math.round(100 * (bytes / Math.pow(1024, i))) / 100 + ' ' + sizes[i]
-}
+               }
