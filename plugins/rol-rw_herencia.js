@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+/*import { promises as fs } from 'fs';
 
 const charactersFilePath = './src/database/personajes.json';
 const confirmaciones = new Map();
@@ -83,3 +83,4 @@ handler.group = true;
 
 export default handler;
                                             
+*/
