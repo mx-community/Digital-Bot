@@ -1,8 +1,14 @@
 import fetch from 'node-fetch'
 let regex = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
 let handler = async (m, { args, usedPrefix, command, text }) => {
+let pruebaXd = `\t〨  *G I T H U B*
+
+\t⸭ 📍 \`\`\`Proporciona un enlace de un repositorio.\`\`\`
+
+\t\t⚶ Por ejemplo:
+\t*${usedPrefix + command}* https://github.com/xxxx/xxxx`
 if (!args[0]) {
-return conn.sendMessage(m.chat, { text: `Ingrese el comando mas un enlace valido de un repositorio de *GitHub* para descargarlo.` }, { quoted: m })
+return conn.sendMessage(m.chat, { text: pruebaXd }, { quoted: m })
 }
 if (!regex.test(args[0])) {
 return conn.sendMessage(m.chat, { text: `📍  Verifica si el enlace ingresado es de un repositorio de *GitHub*.`}, { quoted: m })
@@ -11,9 +17,9 @@ let [_, user, repo] = args[0].match(regex) || []
 let sanitizedRepo = repo.replace(/.git$/, '')
 let repoUrl = `https://api.github.com/repos/${user}/${sanitizedRepo}`
 let zipUrl = `https://api.github.com/repos/${user}/${sanitizedRepo}/zipball`
-await m.react("⏳")
+await m.react("⏰")
 //conn.sendMessage(m.chat, { text: `_ⴵ Buscando resultados, espere un momento..._` }, { quoted: m })
-const thumb = Buffer.from(await (await fetch(`https://qu.ax/hNADg.jpg`)).arrayBuffer())
+const thumb = Buffer.from(await (await fetch(`${global.mMages}`)).arrayBuffer())
 try {
 let [repoResponse, zipResponse] = await Promise.all([
 fetch(repoUrl),
@@ -22,13 +28,16 @@ fetch(zipUrl),
 let repoData = await repoResponse.json()
 let filename = zipResponse.headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
 let type = zipResponse.headers.get('content-type')
-let txt = `·─┄ · ✦ *GitHub : Download* ✦ ·
+let txt = `\t〨  *G I T H U B  :  D L*
 
-⊹ ✎ *Usuario:* ${user}
-⊹ ✎ *Repositorio:* ${sanitizedRepo}
-⊹ ✎ *Enlace:* ${args[0]}
+\t⸭ ✅ ${args[0]}
 
-📍  *Descripcion:* ${repoData.description || 'No tiene descripcion.'}`
+\t\t⧡ Usuario : ${user}
+\t\t⧡ Repositorio : ${sanitizedRepo}
+
+📍  *Descripcion:* ${repoData.description || 'No tiene descripcion.'}
+
+> ${textbot}`
 
 await await conn.sendMessage(m.chat, { text: txt, mentions: [m.sender], contextInfo: { externalAdReply: { 
 title: botname, 
@@ -38,7 +47,9 @@ sourceUrl: null,
 mediaType: 1, renderLargerThumbnail: false }}}, { quoted: m })
 //conn.sendMessage(m.chat, { text: txt, contextInfo: { externalAdReply: { title: botname, body: '📍 Descargando archivo de GitHub, espere un momento...', thumbnailUrl: global.icono, sourceUrl: null, mediaType: 1, showAdAttribution: true, renderLargerThumbnail: true }}} , { quoted: m })
 conn.sendFile(m.chat, await zipResponse.buffer(), filename, null, m)
+await m.react("✅")
 } catch (e) {
+  await m.react("❌")
 await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = ${e}` }, { quoted: m })
 }
 }
