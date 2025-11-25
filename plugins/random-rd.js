@@ -51,7 +51,7 @@ await conn.sendMessage(m.chat, { image: { url: fotos }, caption: messi }, { quot
 } else if (args[0] === "cr7") {
 let cristiano = `\t〨  *R A N D O M*
 
-\t\t⧡ Random : **
+\t\t⧡ Random : *CR7*
 \t\t⧡ Bot : *${botname}*
 
 > ${textbot}`;
@@ -80,7 +80,7 @@ await conn.sendMessage(m.chat, { image: { url: fotos }, caption: cristiano }, { 
 } else if (args[0] === "bts") {
 let bts = `\t〨  *R A N D O M*
 
-\t\t⧡ Random : **
+\t\t⧡ Random : *BTS*
 \t\t⧡ Bot : *${botname}*
 
 > ${textbot}`;
@@ -121,7 +121,7 @@ await conn.sendMessage(m.chat, { image: { url: fotos }, caption: bts }, { quoted
 } else if (args[0] === "navidad") {
 let navidad = `\t〨  *R A N D O M*
 
-\t\t⧡ Random : **
+\t\t⧡ Random : *Navidad*
 \t\t⧡ Bot : *${botname}*
 
 > ${textbot}`;
@@ -149,7 +149,7 @@ await conn.sendMessage(m.chat, { image: { url: fotos }, caption: navidad }, { qu
 } else if (args[0] === "halloween") {
 let hallow = `\t〨  *R A N D O M*
 
-\t\t⧡ Random : **
+\t\t⧡ Random : *Halloween*
 \t\t⧡ Bot : *${botname}*
 
 > ${textbot}`;
@@ -193,7 +193,7 @@ await conn.sendMessage(m.chat, { image: { url: fotos }, caption: hallow }, { quo
 } else if (args[0] === "itzy") {
 let itzy = `\t〨  *R A N D O M*
 
-\t\t⧡ Random : **
+\t\t⧡ Random : *Itzy*
 \t\t⧡ Bot : *${botname}*
 
 > ${textbot}`;
@@ -220,7 +220,7 @@ await conn.sendMessage(m.chat, { image: { url: fotos }, caption: itzy }, { quote
 } else if (args[0] === "universo") {
 let universo = `\t〨  *R A N D O M*
 
-\t\t⧡ Random : **
+\t\t⧡ Random : *Universo*
 \t\t⧡ Bot : *${botname}*
 
 > ${textbot}`;
