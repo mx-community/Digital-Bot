@@ -1,4 +1,4 @@
-import fs from 'fs';
+/*import fs from 'fs';
 import fetch from 'node-fetch';
 let apkSession = new Map();
 let handler = async (m, { conn, text, usedPrefix, command, args }) => {
@@ -54,39 +54,43 @@ return conn.sendMessage(m.chat, { text: `📍  Ingrese el comando y escriba el n
 };
 
 handler.command = /^(apk|app)$/i;
-export default handler;
+export default handler;*/
                        
 
-/*import { search, download } from 'aptoide-scraper'
+import { search, download } from 'aptoide-scraper'
 
 var handler = async (m, { conn, usedPrefix, command, text }) => {
 if (!text) return conn.sendMessage(m.chat, { text: `Ingrese el comando y escriba el nombre de la app o apk para descargar.\n\n• Por ejemplo:\n*#${command}* WhatsApp` }, { quoted: m })
 try {
-await conn.sendMessage(m.chat, { text: `Buscando resultados, espere un momento...` }, { quoted: m })
+await m.react("⏰")
+  //conn.sendMessage(m.chat, { text: `Buscando resultados, espere un momento...` }, { quoted: m })
 let searchA = await search(text)
 let data5 = await download(searchA[0].id)
-let apkResultado = `·─┄ · ✦ *Apk : Download* ✦ ·
+let apkResultado = `\t〨  *A P K  :  D L*
 
-⊹ ✎ *Nombre:* ${data5.name}
-⊹ ✎ *Publicado:* ${data5.lastup}
-⊹ ✎ *Peso:* ${data5.size}
-⊹ ✎ *Paquete:* ${data5.package}
+\t⸭ ✅ ${data5.name}
 
-📍  Descargando, espere un momento...`
+\t ⧡ Publicado : ${data5.lastup}
+\t ⧡ Peso : ${data5.size}
+\t ⧡ Paquete : ${data5.package}
+
+> ${textbot}`
 await conn.sendMessage(m.chat, { text: apkResultado }, { quoted: m })
 //conn.sendFile(m.chat, data5.icon, 'thumbnail.jpg', txt, null, rcanal)
 if (data5.size.includes('GB') || data5.size.replace(' MB', '') > 999) {
+  await m.react("💾")
 return await conn.sendMessage(m.chat, { text: `📍  El archivo es demasiado pesado para descargar.\n- El limite maximo de descarga es de 999MB.` }, { quoted: m })
 }
 await conn.sendMessage(m.chat, { document: { url: data5.dllink }, mimetype: 'application/vnd.android.package-archive', fileName: data5.name + '.apk', caption: null }, { quoted: m })
+  await m.react("✅")
 } catch (error) {
-await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = Command error, try again and if the error persists, report the command.` }, { quoted: m })
+  await m.react("❌")
+await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = ${error}` }, { quoted: m })
 }}
 
 handler.tags = ['descargas']
 handler.help = ['apk']
 handler.command = ['apk', 'app']
 
-
 export default handler
-*/
+
