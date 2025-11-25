@@ -8,7 +8,7 @@ return conn.reply(m.chat,
 \t⸭ 📍 \`\`\`Proporcione un enlace de Instagram.\`\`\`
 
 \t\t⚶ Por ejemplo:
-\t*${usedPrefix + command}* https://www.instagram.com/reel/xxxxxxxx/xxxxxxx`,
+\t*${usedPrefix + command}* https://www.instagram.com/xxxx/xxxx`,
 m)
 }
 
