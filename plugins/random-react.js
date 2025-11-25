@@ -68,7 +68,13 @@ if (m.isGroup) {
 let preg = [ 'https://qu.ax/XCSuG.gif', 'https://qu.ax/MnJXc.gif' ];
 const video = preg[Math.floor(Math.random() * preg.length)];
 let mentions = [who];
-conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
+conn.sendFile(m.chat, video, `toru.gif`, str, m, { 
+            mentions,
+            contextInfo: {
+                mentionedJid: mentions
+            }
+        })
+ //conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
  }
 }
 
