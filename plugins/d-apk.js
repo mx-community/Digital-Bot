@@ -81,7 +81,15 @@ let apkResultado = `\t〨  *A P K  :  D L*
 \t ⧡ Paquete : ${data5.package}
 
 > ${textbot}`
-await conn.sendMessage(m.chat, { text: apkResultado }, { quoted: m })
+const thumb = (await conn.getFile(data5.icon))?.data
+await conn.sendMessage(m.chat, { text: apkResultado, mentions: [m.sender], contextInfo: { externalAdReply: { 
+title: data5.name, 
+body: botname, 
+thumbnail: thumb, 
+sourceUrl: null, 
+mediaType: 1, renderLargerThumbnail: false }}}, { quoted: m })
+  
+  //await conn.sendMessage(m.chat, { text: apkResultado }, { quoted: m })
 //conn.sendFile(m.chat, data5.icon, 'thumbnail.jpg', txt, null, rcanal)
 if (data5.size.includes('GB') || data5.size.replace(' MB', '') > 999) {
   await m.react("💾")
