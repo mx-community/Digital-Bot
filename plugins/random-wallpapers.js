@@ -156,7 +156,7 @@ let wallps = [
 const fotos = wallps[Math.floor(Math.random() * wallps.length)];
 await conn.sendMessage(m.chat, { image: { url: fotos }, caption: wallpapers }, { quoted: m });
 //conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
-
+}
 handler.command = ["wallp", "wallpaper"];
 
 export default handler;
