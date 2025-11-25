@@ -21,7 +21,7 @@ const url = `${global.APIs.delirius.url}/ia/gptprompt?text=${encodeURIComponent(
 const res = await axios.get(url)
 if (!res.data?.status || !res.data?.data) throw new Error('Respuesta inválida de Delirius')
 await conn.sendMessage(m.chat, { text: res.data.data }, { quoted: m })
-
+}
 handler.command = ["chatgpt", "gpt"]
 
 export default handler
