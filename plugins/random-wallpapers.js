@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 let handler = async (m, { conn, usedPrefix, command }) => {
-let walpapers = `\t〨  *W A L L P A P E R*
+let wallpapers = `\t〨  *W A L L P A P E R*
 
 \t⸭ ✅ \`\`\`Fondos de pantalla para celular.\`\`\`
 
