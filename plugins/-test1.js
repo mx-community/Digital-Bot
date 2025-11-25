@@ -1,19 +1,32 @@
-import fetch from 'node-fetch'
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-if (!text) return conn.sendMessage(m.chat, { text: `Ingrese el comando y escriba cualquier cosa para hablar con *BlackBox*.\n\n• *Por ejemplo:*\n${usedPrefix + command} Hola ¿Como estas?` }, { quoted: m })
-await m.react('⏳')
+import { webp2mp4 } from '../lib/webp2mp4.js'
+import { ffmpeg } from '../lib/converter.js'
+let handler = async (m, { conn }) => {
+if (!m.quoted) return conn.reply(m.chat, '🚩 Responde a un *Sticker Animado.*', m)
+let mime = m.quoted.mimetype || ''
+if (!/webp|audio/.test(mime)) return conn.reply(m.chat, '🚩 Responde a un *Sticker Animado.*', m)
+await m.react('🕓')
 try {
-let api = await fetch(`https://apis-starlights-team.koyeb.app/starlight/blackbox?system=Eres+una+ai+llamada+blackbox&text=${text}`)
-let json = await api.json()
-if (json.results) {
-await conn.sendMessage(m.chat, { text: json.results }, { quoted: m })
-} else {
-await conn.sendMessage(m.chat, { text: `No se ha podido conectar con *BlackBox*, intentelo de nuevo mas tarde.`}, { quoted: m })
+let media = await m.quoted.download()
+let out = Buffer.alloc(0)
+if (/webp/.test(mime)) {
+out = await webp2mp4(media)
+} else if (/audio/.test(mime)) {
+out = await ffmpeg(media, [
+'-filter_complex', 'color',
+'-pix_fmt', 'yuv420p',
+'-crf', '51',
+'-c:a', 'copy',
+'-shortest'
+], 'mp3', 'mp4')
 }
+await conn.sendFile(m.chat, out, 'thumbnail.jpg', "wa" , m)
+await m.react('✅')
 } catch {
-await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = Command error, try again and if the error persists, report the command.` }, { quoted: m })
-}
-}
-handler.command = ['blackbox', 'ia-box']
+await m.react('✖️')
+}}
+handler.help = ['tovid *<sticker>*']
+handler.tags = ['sticker', 'tools']
+handler.command = ['tovideo', 'tovid']
+
+
 export default handler
-                                                                                                                                              
