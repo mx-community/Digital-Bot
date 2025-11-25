@@ -10,7 +10,8 @@ return conn.sendMessage(m.chat, { text: `Ingrese el comando y responda a una ima
 }
 
 try {
-conn.sendMessage(m.chat, { text: `Mejorando calidad, espere un momento...` }, { quoted: m })
+await m.react("⏰")
+  //conn.sendMessage(m.chat, { text: `Mejorando calidad, espere un momento...` }, { quoted: m })
 const media = await quoted.download()
 const ext = mime.split('/')[1]
 const filename = `upscaled_${Date.now()}.${ext}`
@@ -42,9 +43,11 @@ const resultBuffer = await (await fetch(json.result_url)).buffer()
 
 await conn.sendMessage(m.chat, {
 image: resultBuffer,
-caption: ``.trim()
-}, { quoted: fkontak })
+caption: `✅  *IMG_remini-hd.jpg*`.trim()
+}, { quoted: m })
+  await m.react("✅")
 } catch (err) {
+  await m.react("❌")
 await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = ${err}` }, { quoted: m })
 }
 }
