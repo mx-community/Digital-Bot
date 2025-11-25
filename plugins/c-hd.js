@@ -45,7 +45,7 @@ image: resultBuffer,
 caption: ``.trim()
 }, { quoted: fkontak })
 } catch (err) {
-await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = Command error, try again and if the error persists, report the command.` }, { quoted: m })
+await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = ${err}` }, { quoted: m })
 }
 }
 
