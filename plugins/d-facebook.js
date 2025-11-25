@@ -5,7 +5,12 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 try {
 if (!args[0]) {
 return conn.reply(m.chat,
-`Ingrese el comando mas un enlace de un video de facebook para descargarlo.`, m)
+`\t〨  *F A C E B O O K*
+
+\t⸭ 📍 \`\`\`Proporciona un enlace de Facebook\`\`\`
+
+\t\t⚶ Por ejemplo:
+\t*${usedPrefix + command}* https://www.facebook.com/xxx/xxxx`, m)
 }
 
 const url = args[0]
