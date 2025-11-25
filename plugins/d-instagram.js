@@ -1,9 +1,14 @@
 import fetch from 'node-fetch'
-let handler = async (m, { conn, usedPrefix, args }) => {
+let handler = async (m, { conn, usedPrefix, command, args }) => {
 try {
 if (!args[0]) {
 return conn.reply(m.chat,
-`Ingrese el comando mas un enlace de un video o imagen de *Instagram* para descargarlo.`,
+`\t〨  *I N S T A G R A M*
+
+\t⸭ 📍 \`\`\`Proporcione un enlace de Instagram.\`\`\`
+
+\t\t⚶ Por ejemplo:
+\t*${usedPrefix + command}* https://www.instagram.com/reel/xxxxxxxx/xxxxxxx`,
 m)
 }
 
@@ -20,7 +25,6 @@ const api1 = `https://mayapi.ooguy.com/instagram?url=${encodeURIComponent(url)}&
 const api2 = `https://apiadonix.kozow.com/download/instagram?apikey=${global.apikey}&url=${encodeURIComponent(url)}`
 
 let mediaUrl, mediaTitle, mediaType, apiUsada = 'May API'
-
 
 try {
 const res = await fetch(api1, { timeout: 30000 })
@@ -61,22 +65,21 @@ const isVideo = mediaType === 'video' || mediaUrl.includes('.mp4')
 if (isVideo) {
 await conn.sendMessage(m.chat, {
 video: { url: mediaUrl },
-caption: `\t〨  *I N S T A G R A M*\n\n\t⸭ ✅ ${textbot}`
+caption: `Video`
 }, { quoted: m })
 } else {
 await conn.sendMessage(m.chat, {
 image: { url: mediaUrl },
-caption: `\t〨  *I N S T A G R A M*\n\n\t⸭ ✅ ${textbot}`
+caption: `Imagen`
 }, { quoted: m })
 }
 
 await m.react('✅')
 
 } catch (error) {
-console.error('❌ Error en descarga Instagram:', error)
 await conn.reply(m.chat,
 `📍 ${error.message}`,
-m)
+m )
 await m.react('❌')
 }
 }
@@ -85,5 +88,5 @@ handler.help = ['ig']
 handler.tags = ['downloader']
 handler.command = ['ig', 'instagram', 'igdl']
 
-export default handler
 
+export default handler
