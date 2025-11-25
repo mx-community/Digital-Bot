@@ -11,8 +11,8 @@ if (!data.status || !data.data)
   throw new Error("No se encontró la aplicación.");
 const app = data.data;
 apkSession.set(m.chat, { app });
-//const thumb = Buffer.from(await (await fetch(`${app.image}`)).arrayBuffer())
-let description = `·─┄ · ✦ *Apk : Download* ✦ ·
+const thumbXd = (await conn.getFile(app.image))?.data
+  let description = `·─┄ · ✦ *Apk : Download* ✦ ·
 
 ⊹ ✎ *Nombre:* ${app.name}
 ⊹ ✎ *Paquete:* ${app.id}
@@ -29,7 +29,7 @@ let description = `·─┄ · ✦ *Apk : Download* ✦ ·
 await conn.sendMessage(m.chat, { text: description, mentions: [m.sender], contextInfo: { externalAdReply: { 
 title: app.name, 
 body: app.publish, 
-thumbnail: app.image, 
+thumbnail: thumbXd, 
 sourceUrl: null, 
 mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 return;
