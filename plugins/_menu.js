@@ -49,10 +49,12 @@ let menu = `> ${hora}, ${dia} ${fechaTxt}
 ⧡ #menu ⧿ search
 ⧡ #menu ⧿ stickers
 ⧡ #menu ⧿ tools
-⧡ #menu ⧿ sistema\`\`\`
+⧡ #menu ⧿ sistema
+⧡ #menu ⧿ rw (update...)
+⧡ #menu ⧿ random\`\`\`
 
 \t⚶ Por ejemplo:
-*#menu all*`
+*#menu info*`
 return conn.sendMessage(m.chat, { text: menu, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: false }}}, { quoted: m })
 } else if (args[0] === '1' || args[0] === 'info') {
 let menu1 = `🜲 Usuario : @${name}
@@ -61,18 +63,18 @@ let menu1 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Informacion:
-#support   » <text>
-#terminos  » <text>
-#creador   »
-#ping      »
-#canal     »
-#status    »
-#infobot   »
-#donate    »
-#ds        »
-#mp        »
-#bk        »
-#pay       »\`\`\`
+#support   ⧿ <text>
+#terminos  ⧿ <text>
+#creador   ⧿
+#ping      ⧿
+#canal     ⧿
+#status    ⧿
+#infobot   ⧿
+#donate    ⧿
+#ds        ⧿
+#mp        ⧿
+#bk        ⧿
+#pay       ⧿\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu1, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
@@ -83,17 +85,17 @@ let menu2 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Descargas:
-#github    » <link>
-#apk       » <text>
-#facebook  » <link>.
-#instagram » <link>.
-#play      » <text o link>
-#mediafire » <link>
-#twitter   » <link>
-#tiktok    » <link>
-#a-tiktok  » <link>
-#p-tiktok  » <link>
-#pinterest » <link>\`\`\`
+#github   ⧿ <link>
+#apk      ⧿ <text>
+#fb       ⧿ <link>.
+#ig       ⧿ <link>.
+#play     ⧿ <text o link>
+#mf       ⧿ <link>
+#twitter  ⧿ <link>
+#tiktok   ⧿ <link>
+#a-tiktok ⧿ <link>
+#p-tiktok ⧿ <link>
+#pin      ⧿ <link>\`\`\`
 
 > ${textbot}
 `
@@ -105,22 +107,23 @@ let menu3 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍 \`\`\`Para grupos:
-#add        » <nro>
-#kick       » <reply>
-#delete     » <reply>
-#promote    » <reply>
-#demote     » <reply>
-#warn       » <reply>
-#unwarn     » <reply>
-#g-img      » <reply>
-#g-name     » <text>
-#g-desc     » <text>
-#g-welcome  » <text>
-#d-bay      » <text>
-#link       »\`\`\`
+#add       ⧿ <nro>
+#kick      ⧿ <reply>
+#delete    ⧿ <reply>
+#promote   ⧿ <reply>
+#demote    ⧿ <reply>
+#warn      ⧿ <reply>
+#unwarn    ⧿ <reply>
+#g-img     ⧿ <reply>
+#g-name    ⧿ <text>
+#g-desc    ⧿ <text>
+#g-welc    ⧿ <text>
+#g-bye     ⧿ <text>
+#mute      ⧿ <reply>
+#unmute    ⧿ <reply>
+#link      ⧿\`\`\`
 
-> ${textbot}
-`
+> ${textbot}`
 return conn.sendMessage(m.chat, { text: menu3, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "rpg" || args[0] === "4") {
 let menu4 = `🜲 Usuario : @${name}
@@ -129,21 +132,20 @@ let menu4 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Juegos rpg:
-#lb        »
-#cofre     »
-#levelup   »
-#work      »
-#fishing   »
-#mining    »
-#ret       » <query>
-#ret2      » <query>
-#dep       » <query>
-#dep2      » <query>
-#give      » <query>
-#give2     » <text>\`\`\`
+#lb       ⧿
+#cofre    ⧿
+#levelup  ⧿
+#work     ⧿
+#fishing  ⧿
+#mining   ⧿
+#ret      ⧿ <query>
+#ret2     ⧿ <query>
+#dep      ⧿ <query>
+#dep2     ⧿ <query>
+#give     ⧿ <query>
+#give2    ⧿ <text>\`\`\`
 
-> ${textbot}
-`
+> ${textbot}`
 return conn.sendMessage(m.chat, { text: menu4, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
 } else if (args[0] === "ajustes" || args[0] === "5") {
 let menu5 = `🜲 Usuario : @${name}
@@ -152,13 +154,13 @@ let menu5 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Ajustes:
-#hweb      » <link>
-#lid       »
-#getpic    » <mention>
-#hd        » <query>
-#cid       » <link>
-#trad      » <text>
-#calc      » <query>\`\`\`
+#hweb     ⧿ <link>
+#lid      ⧿
+#getpic   ⧿ <mention>
+#hd       ⧿ <query>
+#cid      ⧿ <link>
+#trad     ⧿ <text>
+#calc     ⧿ <query>\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu5, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
@@ -169,43 +171,43 @@ let menu6 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Crear logos:
-#logo1    » <text>
-#logo2    » <text>
-#logo3    » <text>
-#logo4    » <text>
-#logo5    » <text>
-#logo6    » <text>
-#logo7    » <text>
-#logo8    » <text>
-#logo9    » <text>
-#logo10   » <text>
-#logo11   » <text>
-#logo12   » <text>
-#logo13   » <text>
-#logo14   » <text>
-#logo15   » <text>
-#logo16   » <text>
-#logo17   » <text>
-#logo18   » <text>
-#logo19   » <text>
-#logo20   » <text>
-#logo21   » <text>
-#logo22   » <text>
-#logo23   » <text>
-#logo24   » <text>
-#logo25   » <text>
-#logo26   » <text>
-#logo27   » <text>
-#logo28   » <text>
-#logo29   » <text>
-#logo30   » <text>
-#logo31   » <text>
-#logo32   » <text>
-#logo33   » <text>
-#logo34   » <text>
-#logo35   » <text>
-#logo36   » <text>
-#logo37   » <text>\`\`\`
+#logo1    ⧿ <text>
+#logo2    ⧿ <text>
+#logo3    ⧿ <text>
+#logo4    ⧿ <text>
+#logo5    ⧿ <text>
+#logo6    ⧿ <text>
+#logo7    ⧿ <text>
+#logo8    ⧿ <text>
+#logo9    ⧿ <text>
+#logo10   ⧿ <text>
+#logo11   ⧿ <text>
+#logo12   ⧿ <text>
+#logo13   ⧿ <text>
+#logo14   ⧿ <text>
+#logo15   ⧿ <text>
+#logo16   ⧿ <text>
+#logo17   ⧿ <text>
+#logo18   ⧿ <text>
+#logo19   ⧿ <text>
+#logo20   ⧿ <text>
+#logo21   ⧿ <text>
+#logo22   ⧿ <text>
+#logo23   ⧿ <text>
+#logo24   ⧿ <text>
+#logo25   ⧿ <text>
+#logo26   ⧿ <text>
+#logo27   ⧿ <text>
+#logo28   ⧿ <text>
+#logo29   ⧿ <text>
+#logo30   ⧿ <text>
+#logo31   ⧿ <text>
+#logo32   ⧿ <text>
+#logo33   ⧿ <text>
+#logo34   ⧿ <text>
+#logo35   ⧿ <text>
+#logo36   ⧿ <text>
+#logo37   ⧿ <text>\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu6, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
@@ -216,18 +218,18 @@ let menu7 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Perfil:
-#perfil    » 
-#myp       »
-#registro  » <query>
-#mycode    »
-#dreg      » <code>
-#p-genero  » <texto>
-#d-genero  »
-#p-cumple  » <texto>
-#d-cumple  »
-#p-desc    » <texto>
-#d-desc    » 
-#p-age     » <nro>\`\`\`
+#perfil   ⧿
+#myp      ⧿
+#registro ⧿ <query>
+#mycode   ⧿
+#dreg     ⧿ <code>
+#p-genero ⧿ <text>
+#d-genero ⧿
+#p-cumple ⧿ <text>
+#d-cumple ⧿
+#p-desc   ⧿ <text>
+#d-desc   ⧿
+#p-age    ⧿ <nro>\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu7, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
@@ -238,12 +240,13 @@ let menu8 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Busquedas:
-#tiktoks   » <texto>
-#imagen    » <texto>
-#spotifys  » <texto>
-#apples    » <texto>
-#capcuts   » <texto>
-#sounds    » <texto>\`\`\`
+#tiktoks  ⧿ <text>
+#imagen   ⧿ <text>
+#spotifys ⧿ <text>
+#apples   ⧿ <text>
+#capcuts  ⧿ <text>
+#yahoos   ⧿ <text>
+#sounds   ⧿ <text>\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu8, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
@@ -254,12 +257,12 @@ let menu9 = `╭🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Stickers:
-#sticker   » <reply>
-#brat      » <texto>
-#emojix    » <query>
-#qc        » <text>
-#exif      » <text>
-#d-exif\`\`\`
+#sticker  ⧿ <reply>
+#brat     ⧿ <text>
+#emojix   ⧿ <query>
+#qc       ⧿ <text>
+#exif     ⧿ <text>
+#d-exif   ⧿\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu9, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
@@ -270,13 +273,13 @@ let menu10 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Convertidores:
-#upload    »
-#turl      » <reply>
-#catbox    » <reply>
-#timg      » <reply>
-#tgif      » <reply>
-#tmp3      » <reply>
-#tvid      » <reply>\`\`\`
+#upload   ⧿
+#turl     ⧿ <reply>
+#catbox   ⧿ <reply>
+#timg     ⧿ <reply>
+#tgif     ⧿ <reply>
+#tmp3     ⧿ <reply>
+#tvid     ⧿ <reply>\`\`\`
 
 > ${textbot}`
 return conn.sendMessage(m.chat, { text: menu10, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: null, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
@@ -288,50 +291,36 @@ let menuAll = `${hora}, ${dia} ${fechaTxt}
 ⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
 
 
-\`\`\`⚶ INFORMACIÓN ❄️•
-#support   <text>
-#alquilar
-#terminos <text>
-#creador
-#ping
-#canal
-#status
-#infobot
-#donate
-#ds
-#mp
-#bk
-#pay
+\t\t⚶ 📍\`\`\`Informacion:
+#support   ⧿ <text>
+#terminos  ⧿ <text>
+#creador   ⧿
+#ping      ⧿
+#canal     ⧿
+#status    ⧿
+#infobot   ⧿
+#donate    ⧿
+#ds        ⧿
+#mp        ⧿
+#bk        ⧿
+#pay       ⧿\`\`\`
 
 
-⚶ DESCARGAS •
-#github   <link>
-#apk      <text>
-#facebook <link>.
-#instagram <link>.
-#play     <text o link>
-#mediafire<link>
-#twitter  <link>
-#tiktok   <link>
-#a-tiktok <link>
-#p-tiktok <link>
-#pinterest <link>
+\t\t⚶ 📍\`\`\`Descargas:
+#github   ⧿ <link>
+#apk      ⧿ <text>
+#fb       ⧿ <link>.
+#ig       ⧿ <link>.
+#play     ⧿ <text o link>
+#mf       ⧿ <link>
+#twitter  ⧿ <link>
+#tiktok   ⧿ <link>
+#a-tiktok ⧿ <link>
+#p-tiktok ⧿ <link>
+#pin      ⧿ <link>\`\`\`
 
 
-⚶ PARA GRUPOS •
-#add  <nro>
-#kick     <reply>
-#delete   <reply>
-#promote  <reply>
-#demote   <reply>
-#warn     <reply>
-#unwarn  <reply>
-#g-img   <reply>
-#g-name   <texto>
-#g-desc   <texto>
-#g-welcome <texto>
-#d-bay    <texto>
-#link
+
 
 
 ⚶ JUEGOS RPG •
@@ -374,7 +363,22 @@ let menuAll = `${hora}, ${dia} ${fechaTxt}
 #logo12   <texto>
 #logo13   <texto>
 #logo14   <texto>
-#logo15   <texto>
+#logo15   <\t\t⚶ 📍 \`\`\`Para grupos:
+#add       ⧿ <nro>
+#kick      ⧿ <reply>
+#delete    ⧿ <reply>
+#promote   ⧿ <reply>
+#demote    ⧿ <reply>
+#warn      ⧿ <reply>
+#unwarn    ⧿ <reply>
+#g-img     ⧿ <reply>
+#g-name    ⧿ <text>
+#g-desc    ⧿ <text>
+#g-welc    ⧿ <text>
+#g-bye     ⧿ <text>
+#mute      ⧿ <reply>
+#unmute    ⧿ <reply>
+#link      ⧿\`\`\`texto>
 #logo16   <texto>
 #logo17   <texto>
 #logo18   <texto>
@@ -456,13 +460,48 @@ let menu10 = `🜲 Usuario : @${name}
 
 
 \t\t⚶ 📍\`\`\`Sistemas:
-#temblor   »
-#pais      » <text>
-#clima     » <text>\`\`\`
+#temblor  ⧿
+#pais     ⧿ <text>
+#clima    ⧿ <text>\`\`\`
 
 > ${textbot}`
  return conn.sendMessage(m.chat, { text: menu10, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
-}
+} else if (args[0] === "rw" || args[0] === "12") {
+let menu11 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
+
+
+\t\t⚶ 📍\`\`\`Gacha:
+#rw       ⧿
+#votec    ⧿ <query>
+#harem    ⧿ <reply>
+#claim    ⧿\`\`\`
+
+> ${textbot}`
+ return conn.sendMessage(m.chat, { text: menu11, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
+ } else if (args[0] === "random" || args[0] === "13") {
+let menu13 = `🜲 Usuario : @${name}
+ᗢ Premium : ${premium}
+⚉ Bot : ${(conn.user.jid == global.conn.user.jid ? 'Principal.' : 'Servidor.')}
+
+
+\t\t⚶ 📍\`\`\`Random:
+#random ⧿ messi
+#random ⧿ cr7
+#random ⧿ bts
+#random ⧿ navidad
+#random ⧿ halloween 
+#random ⧿ itzy
+#random ⧿ universo
+#wallp  ⧿\`\`\`
+
+> ${textbot}`
+ return conn.sendMessage(m.chat, { text: menu12, mentions: [m.sender], contextInfo: { externalAdReply: { title: botname, body: textbot, thumbnail: thumbBot, sourceUrl: null, mediaType: 1, renderLargerThumbnail: true }}}, { quoted: m })
+} else {
+let pruebaXd = `📍  El menu *( ${args[0]} )* no existe.\n- Use *${usedPrefix}menu* para ver las categorías.`
+return conn.sendMessage(m.chat, { text: pruebaXd }, { quoted: m })
+ } 
 } catch (e) {
 console.error(e)
 await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = ${e}` }, { quoted: m })
