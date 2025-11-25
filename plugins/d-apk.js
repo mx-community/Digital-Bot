@@ -60,7 +60,13 @@ export default handler;*/
 import { search, download } from 'aptoide-scraper'
 
 var handler = async (m, { conn, usedPrefix, command, text }) => {
-if (!text) return conn.sendMessage(m.chat, { text: `Ingrese el comando y escriba el nombre de la app o apk para descargar.\n\n• Por ejemplo:\n*#${command}* WhatsApp` }, { quoted: m })
+let pruebaXd = `\t〨  *A P K  :  D L*
+
+\t⸭ 📌 \`\`\`Proporcione el nombre del apk.\`\`\`
+
+\t\t⚶ Por ejemplo:
+\t*${usedPrefix + command}* WhatsApp`
+if (!text) return conn.sendMessage(m.chat, { text: pruebaXd }, { quoted: m })
 try {
 await m.react("⏰")
   //conn.sendMessage(m.chat, { text: `Buscando resultados, espere un momento...` }, { quoted: m })
