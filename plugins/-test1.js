@@ -24,11 +24,11 @@ ${effects.map((effect) => `_» ${effect}_`).join('\n')}
 `.trim(), m)
 let q = m.quoted ? m.quoted : m
 let mime = (q.msg || q).mimetype || ''
-if (!mime) throw `${fg}𝙉𝙊 𝙎𝙀 𝙀𝙉𝘾𝙊𝙉𝙏𝙍𝙊 𝙇𝘼 𝙄𝙈𝘼𝙂𝙀𝙉, 𝙍𝙀𝘾𝙐𝙀𝙍𝘿𝙀 𝙍𝙀𝙎𝙋𝙊𝙉𝘿𝙀𝙍 𝘼 𝙐𝙉𝘼 𝙄𝙈𝘼𝙂𝙀𝙉\n\n𝙉𝙊 𝙄𝙈𝘼𝙂𝙀 𝙁𝙊𝙐𝙉𝘿, 𝙍𝙀𝙈𝙀𝙈𝘽𝙀𝙍 𝙏𝙊 𝙍𝙀𝙋𝙇𝙔 𝙏𝙊 𝘼𝙉 𝙄𝙈𝘼𝙂𝙀`
-if (!/image\/(jpe?g|png)/.test(mime)) throw `${ag}𝙀𝙇 𝙁𝙊𝙍𝙈𝘼𝙏𝙊 𝘿𝙀𝘽𝙀 𝘿𝙀 𝙎𝙀𝙍 *jpg o jpeg*\n\n𝙏𝙃𝙀 𝙁𝙊𝙍𝙈𝘼𝙏 𝙈𝙐𝙎𝙏 𝘽𝙀 *jpg or jpeg*`
+if (!mime) conn.reply(m.chat, `𝙉𝙊 𝙎𝙀 𝙀𝙉𝘾𝙊𝙉𝙏𝙍𝙊 𝙇𝘼 𝙄𝙈𝘼𝙂𝙀𝙉, 𝙍𝙀𝘾𝙐𝙀𝙍𝘿𝙀 𝙍𝙀𝙎𝙋𝙊𝙉𝘿𝙀𝙍 𝘼 𝙐𝙉𝘼 𝙄𝙈𝘼𝙂𝙀𝙉\n\n𝙉𝙊 𝙄𝙈𝘼𝙂𝙀 𝙁𝙊𝙐𝙉𝘿, 𝙍𝙀𝙈𝙀𝙈𝘽𝙀𝙍 𝙏𝙊 𝙍𝙀𝙋𝙇𝙔 𝙏𝙊 𝘼𝙉 𝙄𝙈𝘼𝙂𝙀`, m)
+if (!/image\/(jpe?g|png)/.test(mime)) conn.reply(m.chat, `𝙀𝙇 𝙁𝙊𝙍𝙈𝘼𝙏𝙊 𝘿𝙀𝘽𝙀 𝘿𝙀 𝙎𝙀𝙍 *jpg o jpeg*\n\n𝙏𝙃𝙀 𝙁𝙊𝙍𝙈𝘼𝙏 𝙈𝙐𝙎𝙏 𝘽𝙀 *jpg or jpeg*`, m)
 let img = await q.download()
 let url = await uploadImage(img)
-let apiUrl = global.API('https://some-random-api.ml/canvas/', encodeURIComponent(effect), {
+let apiUrl = global.APIs('https://some-random-api.ml/canvas/', encodeURIComponent(effect), {
 avatar: url
 })
 try {
