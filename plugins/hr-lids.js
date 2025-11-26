@@ -51,7 +51,7 @@ ${tarjetas}
 
 > 📍  Puede usar *${usedPrefix + command} 2* para ver la siguiente pagina.`
 
-return conn.sendMessage(m.chat, { text: texto, mentions: await conn.parseMention(texto), contextInfo: { externalAdReply: { 
+return conn.sendMessage(m.chat, { text: texto, mentions: [mencionados], contextInfo: { externalAdReply: { 
 title: botname, 
 body: textbot, 
 thumbnail: thumb, 
