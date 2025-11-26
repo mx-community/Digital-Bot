@@ -36,10 +36,6 @@ const mencionados = paginaActual.map(p => p.id)
 const totalAdmins = participantes.filter(p => p.admin).length
 const totalMiembros = participantes.length - totalAdmins
 
-const imagenPersonal = {
-url: "https://raw.githubusercontent.com/AkiraDevX/uploads/main/uploads/1763842412584_898365.jpeg"
-}
-
 const texto = `
 \t〨  [ ${groupMetadata.subject} ]
 
@@ -52,7 +48,7 @@ ${tarjetas}
 
 > 📍  Puede usar *${usedPrefix + command} 2* para ver la siguiente pagina.`
 
-return await conn.sendMessage(m.chat, { image: imagenPersonal, caption: texto, mentions: mencionados })
+return await conn.sendMessage(m.chat, { image: global.mMages, caption: texto, mentions: mencionados })
 }
 
 handler.command = ['lids']
