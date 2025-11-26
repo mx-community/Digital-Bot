@@ -21,7 +21,7 @@ if (/video/g.test(mime))
 if ((q.msg || q).seconds > 11)
 return conn.sendMessage(m.chat, { text: `📍  El video no debe durar mas de 10 segundos.\n\n\t\t＃ Recorta el vídeo y inténtalo de nuevo.` }, { quoted: m })
 let img = await q.download?.()
-if (!img) return conn.sendMessage(m.chat, { text: `·─┄ · ✦ *Created : Stickers* ✦ ·\n\t𝇈 📍 \`\`\`Crea stickers sin limite.\`\`\`\n\n\t\t⧡ *${usedPrefix + command}* (imagen, video o link)\n\t\t⧡ *${usedPrefix}brat* (texto)\n\t\t⧡ *${usedPrefix}qc* (texto)\n\t\t⧡ *${usedPrefix}exif* (texto/texto2)\n\t\t⧡ *${usedPrefix}d-exif* (defauld)\n\n\n> ${textbot}` }, { quoted: m })
+if (!img) return conn.sendMessage(m.chat, { text: `·─┄ · ✦ *Created : Stickers* ✦ ·\n\t𝇈 📍 \`\`\`Crea stickers sin limite.\`\`\`\n\n\t\t⧡ *${usedPrefix + command}* (imagen, video o link)\n\t\t⧡ *${usedPrefix}brat* (texto)\n\t\t⧡ *${usedPrefix}qc* (texto)\n\t\t⧡ *${usedPrefix}exif* (texto/texto2)\n\t\t⧡ *${usedPrefix}d-exif* (defauld)\n\t\t⧡ *${usedPrefix}stext* (text, text)\n\n> ${textbot}` }, { quoted: m })
 let out
 try {
 stiker = await sticker(img, false, texto1, texto2)
@@ -47,7 +47,7 @@ if (!stiker) stiker = e
 } finally {
 if (stiker) conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, true, { contextInfo: { forwardingScore: 200, isForwarded: false, externalAdReply: { showAdAttribution: false, title: "々  S T I C K E R S  々", body: textbot, mediaType: 2, sourceUrl: null, thumbnail: thumb } } }, {quoted: m} )
 else
-return conn.sendMessage(m.chat, { text: `·─┄ · ✦ *Created : Stickers* ✦ ·\n\t𝇈 📍 \`\`\`Crea stickers sin limite.\`\`\`\n\n\t\t⧡ *${usedPrefix + command}* (imagen, video o link)\n\t\t⧡ *${usedPrefix}brat* (texto)\n\t\t⧡ *${usedPrefix}qc* (texto)\n\t\t⧡ *${usedPrefix}exif* (texto/texto2)\n\t\t⧡ *${usedPrefix}d-exif* (defauld)\n\n\n> ${textbot}` }, { quoted: m })
+return conn.sendMessage(m.chat, { text: `·─┄ · ✦ *Created : Stickers* ✦ ·\n\t𝇈 📍 \`\`\`Crea stickers sin limite.\`\`\`\n\n\t\t⧡ *${usedPrefix + command}* (imagen, video o link)\n\t\t⧡ *${usedPrefix}brat* (texto)\n\t\t⧡ *${usedPrefix}qc* (texto)\n\t\t⧡ *${usedPrefix}exif* (texto/texto2)\n\t\t⧡ *${usedPrefix}d-exif* (defauld)\n\t\t⧡ *${usedPrefix}stext* (text, text)\n\n> ${textbot}` }, { quoted: m })
 }
 
 }
