@@ -1,3 +1,4 @@
+import fetch fron 'node-fetch'
 let handler = async function (m, { conn, args, groupMetadata, usedPrefix, command }) {
 if (!m.isGroup) return conn.sendMessage(m.chat, { text: `📍  Este comando solo puede usarse en grupos.` }, { quoted: m })
 
@@ -36,6 +37,8 @@ const mencionados = paginaActual.map(p => p.id)
 const totalAdmins = participantes.filter(p => p.admin).length
 const totalMiembros = participantes.length - totalAdmins
 
+const thumb = Buffer.from(await (await fetch(`${global.mMages}`)).arrayBuffer())
+ 
 const texto = `
 \t〨  [ ${groupMetadata.subject} ]
 
@@ -48,7 +51,7 @@ ${tarjetas}
 
 > 📍  Puede usar *${usedPrefix + command} 2* para ver la siguiente pagina.`
 
-return await conn.sendMessage(m.chat, { image: global.mMages, caption: texto, mentions: mencionados })
+return await conn.sendMessage(m.chat, { image: thumb, caption: texto, mentions: mencionados })
 }
 
 handler.command = ['lids']
