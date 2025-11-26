@@ -156,6 +156,7 @@ let menu5 = `🜲 Usuario : @${name}
 \t\t⚶ 📍\`\`\`Ajustes:
 #hweb     ⧿ <link>
 #lid      ⧿
+#lids     ⧿
 #getpic   ⧿ <mention>
 #hd       ⧿ <query>
 #cid      ⧿ <link>
@@ -356,6 +357,7 @@ let menuAll = `${hora}, ${dia} ${fechaTxt}
 \t\t⚶ 📍\`\`\`Ajustes:
 #hweb     ⧿ <link>
 #lid      ⧿
+#lids     ⧿
 #getpic   ⧿ <mention>
 #hd       ⧿ <query>
 #cid      ⧿ <link>
