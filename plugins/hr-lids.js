@@ -51,7 +51,7 @@ ${tarjetas}
 
 > 📍  Puede usar *${usedPrefix + command} 2* para ver la siguiente pagina.`
 
-return await conn.sendMessage(m.chat, { image: global.fImagen, caption: texto, mentions: mencionados })
+return await conn.sendMessage(m.chat, { image: { url: thumb }, caption: texto, mentions: mencionados }, { quoted: m })
 }
 
 handler.command = ['lids']
