@@ -35,7 +35,7 @@ console.error('Error procesando imagen:', imgError);
 }
 }
 
-let context = `Eres The Mystic Bot (v3.0). Idioma: ${idioma.toUpperCase()}\n` +
+let context = `Eres The Mystic Bot (v3.0). Idioma: Español\n` +
  `Creador: Bruno Sobrino | Repositorio: https://github.com/BrunoSobrino/TheMystic-Bot-MD | Numero del creador: +52 1 999 612 5657\n\n`;
 
 if (hasImage && imageDescription.trim()) {
