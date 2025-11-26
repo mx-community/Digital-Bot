@@ -37,7 +37,7 @@ const mencionados = paginaActual.map(p => p.id)
 const totalAdmins = participantes.filter(p => p.admin).length
 const totalMiembros = participantes.length - totalAdmins
 
-const thumb = Buffer.from(await (await fetch(`${global.mMages}`)).arrayBuffer())
+//const thumb = Buffer.from(await (await fetch(`${global.mMages}`)).arrayBuffer())
  
 const texto = `
 \t〨  [ ${groupMetadata.subject} ]
@@ -51,7 +51,7 @@ ${tarjetas}
 
 > 📍  Puede usar *${usedPrefix + command} 2* para ver la siguiente pagina.`
 
-return  conn.sendMessage(m.chat, { image: { url: thumb }, caption: texto, mentions: mencionados }, { quoted: m })
+return  conn.sendMessage(m.chat, { text: texto, mentions: mencionados }, { quoted: m })
  /*conn.sendMessage(m.chat, { text: texto, mentions: [mencionados], contextInfo: { externalAdReply: { 
 title: botname, 
 body: textbot, 
