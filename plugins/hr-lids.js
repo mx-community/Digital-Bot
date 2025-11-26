@@ -51,14 +51,14 @@ ${tarjetas}
 
 > 📍  Puede usar *${usedPrefix + command} 2* para ver la siguiente pagina.`
 
-return conn.sendMessage(m.chat, { text: texto, mentions: [mencionados], contextInfo: { externalAdReply: { 
+return 
+ /*conn.sendMessage(m.chat, { text: texto, mentions: [mencionados], contextInfo: { externalAdReply: { 
 title: botname, 
 body: textbot, 
 thumbnail: thumb, 
 sourceUrl: null, 
-mediaType: 1, renderLargerThumbnail: false }}}, { quoted: m })
- 
- //await conn.sendMessage(m.chat, { image: { url: thumb }, caption: texto, mentions: mencionados }, { quoted: m })
+mediaType: 1, renderLargerThumbnail: false }}}, { quoted: m })*/
+  conn.sendMessage(m.chat, { image: { url: thumb }, caption: texto, mentions: mencionados }, { quoted: m })
 }
 
 handler.command = ['lids']
