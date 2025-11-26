@@ -28,7 +28,7 @@ if (!mime) conn.reply(m.chat, `𝙉𝙊 𝙎𝙀 𝙀𝙉𝘾𝙊𝙉𝙏𝙍�
 if (!/image\/(jpe?g|png)/.test(mime)) conn.reply(m.chat, `𝙀𝙇 𝙁𝙊𝙍𝙈𝘼𝙏𝙊 𝘿𝙀𝘽𝙀 𝘿𝙀 𝙎𝙀𝙍 *jpg o jpeg*\n\n𝙏𝙃𝙀 𝙁𝙊𝙍𝙈𝘼𝙏 𝙈𝙐𝙎𝙏 𝘽𝙀 *jpg or jpeg*`, m)
 let img = await q.download()
 let url = await uploadImage(img)
-let apiUrl = 'https://some-random-api.ml/canvas/' + encodeURIComponent(effect) + { avatar: url }
+let apiUrl = 'https://some-random-api.ml/canvas/' + encodeURIComponent(effect), { avatar: url }
 try {
 let stiker = await sticker(null, apiUrl, f, g)
 conn.sendFile(m.chat, stiker, null, {asSticker: true})
