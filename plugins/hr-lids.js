@@ -1,4 +1,4 @@
-import fetch fron 'node-fetch'
+import fetch from 'node-fetch'
 let handler = async function (m, { conn, args, groupMetadata, usedPrefix, command }) {
 if (!m.isGroup) return conn.sendMessage(m.chat, { text: `📍  Este comando solo puede usarse en grupos.` }, { quoted: m })
 
