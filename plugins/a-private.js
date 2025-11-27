@@ -23,7 +23,7 @@ let mensajito = `📍  Hola usuario @${m.sender.split('@')[0]}, lo siento, pero 
 • ✎ *ASISTENCIA : MX*
 - https://chat.whatsapp.com/GTuLNKByF0s9Z1ByZyGQTM?mode=wwt`
 if (m.chat === '120363402356085997@newsletter') return !0
-if (bot.antiPrivate && !isROwner) {
+if (bot.fPrivado && !isROwner) {
 await conn.sendMessage(m.chat, { text: mensajito, mentions: await conn.parseMention(mensajito) }, { quoted: m })
 await this.updateBlockStatus(m.chat, 'block')
 }
