@@ -128,18 +128,6 @@ throw false
 chat.fAceptar = isEnable
 break
 }
-case 'f-latam': {
-if (!m.isGroup) {
-if (!isOwner) {
-global.dfail('group', m, conn)
-throw false
-}} else if (!isAdmin) {
-global.dfail('admin', m, conn)
-throw false
-}
-chat.fLatam = isEnable
-break
-}
 case 'f-refuse': {
 if (!m.isGroup) {
 if (!isOwner) {
