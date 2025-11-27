@@ -1,32 +1,77 @@
-const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin }) => {
+let handler = async (m, {conn, usedPrefix, command, args, isOwner, isAdmin, isROwner, text}) => {
 const primaryBot = global.db.data.chats[m.chat].primaryBot
 if (primaryBot && conn.user.jid !== primaryBot) throw !1
-const chat = global.db.data.chats[m.chat]
+let chat = global.db.data.chats[m.chat]
+let bot = global.db.data.settings[conn.user.jid] || {}
 let type = command.toLowerCase()
 let isEnable = chat[type] !== undefined ? chat[type] : false
-let opcionesX = `> ⟪ OPCIONES DISPONIBLES ⟫:
-✎  *#welcome:*  » *on* / *off*
-✎  *#detect:*  » *on* / *off*
-✎  *#admind:*  » *on* / *off*
-✎  *#linkd:*  » *on* / *off*
-✎  *#menup:*  » *on* / *off*
-✎  *#economy:*  » *on* / *off*
-✎  *#juegos:*  » *on* / *off*
-
-• Ejemplo de uso:
-*#welcome* on (activar)
-*#welcome* off (desactivar)`
-if (args[0] === 'on' || args[0] === 'activar') {
-if (isEnable) return conn.sendMessage(m.chat, { text: `✦  La función *#${type}* ya esta activo.\n- Para apagarlo use *#${type} off*.` }, { quoted: m })
+if (args[0] === 'on' || args[0] === 'enable') {
+if (isEnable) return conn.reply(m.chat, `📍  Ese comando ya esta activo. Entendelo.`, m)
 isEnable = true
-} else if (args[0] === 'off' || args[0] === 'desactivar') {
-if (!isEnable) return conn.sendMessage(m.chat, { text: `✦  La función *#${type}* ya esta desactivado.\n- Para activarlo use *#${type} on*.` }, { quoted: m })
+} else if (args[0] === 'off' || args[0] === 'disable') {
+if (!isEnable) return conn.reply(m.chat, `📍  Ese comando ya esta desactivado. Entendelo.`, m)
 isEnable = false
 } else {
-return conn.sendMessage(m.chat, { text: `📍  Aqui estan todas las funciones disponibles en este bot.\n\n${opcionesX}` }, { quoted: m })
+let funciones = `\t〤  *F U N C I O N E S*
+
+\t⸭ 📍 \`\`\`Funciones para el bot.\`\`\`
+
+\t\t⚶ Por ejemplo:
+\t*#${command}* on
+
+------- Funciones :
+${readMore}
+✎ *Bienvenidas:*
+\t⧡ #f-welcome *(on/off)*
+
+✎ *Modo Admin:*
+\t⧡ #f-admin *(on/off)*
+
+✎ *Detector:*
+\t⧡ #f-detect *(on/off)*
+
+✎ *Anti Enlaces:*
+\t⧡ #f-link *(on/off)*
+
+✎ *Menu Basico:*
+\t⧡ #f-menu *(on/off)*
+
+✎ *Modo RPG:*
+\t⧡ #f-rpg *(on/off)*
+
+✎ *Modo Juego:*
+\t⧡ #f-game *(on/off)*
+
+✎ *Chat Bot:*
+\t⧡ #f-bot *(on/off)*
+
+✎ *Modo Descargas:*
+\t⧡ #f-dl *(on/off)*
+
+✎ *Anti Ver:*
+\t⧡ #f-view *(on/off)*
+
+✎ *Auto Aceptar:*
+\t⧡ #f-acept *(on/off)*
+
+✎ *Auto Rechazar:*
+\t⧡ #f-refuse *(on/off)*
+
+✎ *Solo Latam:*
+\t⧡ #f-latam *(on/off)*
+
+✎ *Anti Privado:*
+\t⧡ #f-priv *(on/off)*
+
+✎ *Servidores:*
+\t⧡ #f-server *(on/off)*`
+
+
+return conn.reply(m.chat, funciones, m)
 }
+let isAll = false
 switch (type) {
-case 'welcome': case 'welc': {
+case 'f-welcome': {
 if (!m.isGroup) {
 if (!isOwner) {
 global.dfail('group', m, conn)
@@ -38,7 +83,7 @@ throw false
 chat.welcome = isEnable
 break
 }
-case 'admind': case 'adminb': {
+case 'f-admin': {
 if (!m.isGroup) {
 if (!isOwner) {
 global.dfail('group', m, conn)
@@ -47,10 +92,91 @@ throw false
 global.dfail('admin', m, conn)
 throw false
 }
-chat.modoadmin = isEnable
+chat.fAdmin = isEnable
 break
 }
-case 'detect': case 'detector': {
+case 'f-view': {
+if (!m.isGroup) {
+if (!isOwner) {
+global.dfail('group', m, conn)
+throw false
+}} else if (!isAdmin) {
+global.dfail('admin', m, conn)
+throw false
+}
+chat.fViewonce = isEnable
+break
+}
+case 'f-priv': {
+isAll = true
+if (!isROwner) {
+global.dfail('rowner', m, conn)
+throw false
+}
+bot.fPrivado = isEnable
+break
+}
+case 'f-acept': {
+if (!m.isGroup) {
+if (!isOwner) {
+global.dfail('group', m, conn)
+throw false
+}} else if (!isAdmin) {
+global.dfail('admin', m, conn)
+throw false
+}
+chat.fAceptar = isEnable
+break
+}
+case 'f-latam': {
+if (!m.isGroup) {
+if (!isOwner) {
+global.dfail('group', m, conn)
+throw false
+}} else if (!isAdmin) {
+global.dfail('admin', m, conn)
+throw false
+}
+chat.fLatam = isEnable
+break
+}
+case 'f-refuse': {
+if (!m.isGroup) {
+if (!isOwner) {
+global.dfail('group', m, conn)
+throw false
+}} else if (!isAdmin) {
+global.dfail('admin', m, conn)
+throw false
+}
+chat.fRechazar = isEnable
+break
+}
+case 'f-bot': {
+if (!m.isGroup) {
+if (!isOwner) {
+global.dfail('group', m, conn)
+throw false
+}} else if (!isAdmin) {
+global.dfail('admin', m, conn)
+throw false
+}
+chat.fChatgp = isEnable
+break
+}
+case 'f-dl': {
+if (!m.isGroup) {
+if (!isOwner) {
+global.dfail('group', m, conn)
+throw false
+}} else if (!isAdmin) {
+global.dfail('admin', m, conn)
+throw false
+}
+chat.fDescargas = isEnable
+break
+}
+case 'f-detect': {
 if (!m.isGroup) {
 if (!isOwner) {
 global.dfail('group', m, conn)
@@ -62,7 +188,7 @@ throw false
 chat.detect = isEnable
 break
 }
-case 'linkd': case 'durl': {
+case 'f-link': {
 if (!m.isGroup) {
 if (!isOwner) {
 global.dfail('group', m, conn)
@@ -71,10 +197,10 @@ throw false
 global.dfail('admin', m, conn)
 throw false
 }
-chat.antiLink = isEnable
+chat.fEnlaces = isEnable
 break
 }
-case 'menup': case 'pmenu': {
+case 'f-menu': {
 if (!m.isGroup) {
 if (!isOwner) {
 global.dfail('group', m, conn)
@@ -83,10 +209,10 @@ throw false
 global.dfail('admin', m, conn)
 throw false
 }
-chat.menup = isEnable
+chat.fMenu = isEnable
 break
 }
-case 'economy': case 'recurs': {
+case 'f-rpg': {
 if (!m.isGroup) {
 if (!isOwner) {
 global.dfail('group', m, conn)
@@ -95,10 +221,10 @@ throw false
 global.dfail('admin', m, conn)
 throw false
 }
-chat.economy = isEnable
+chat.fRpg = isEnable
 break
 }
-case 'rpg': case 'juegos': {
+case 'f-game': {
 if (!m.isGroup) {
 if (!isOwner) {
 global.dfail('group', m, conn)
@@ -107,15 +233,22 @@ throw false
 global.dfail('admin', m, conn)
 throw false
 }
-chat.gacha = isEnable
+chat.fJuegos = isEnable
 break
 }}
 chat[type] = isEnable
-await conn.sendMessage(m.chat, { text: `「 ✓ 」 Se ha *${isEnable ? 'activado' : 'desactivado'}* la funcion *#${type}* con exito.` }, { quoted: m })
+
+let toruAc = `\t〤  *F U N C I O N*
+
+\t⸭ ✅ Comando ( *${type}* ) ${isEnable ? 'activado' : 'desactivado'} con exito en ${isAll ? 'todos los chats.' : 'este grupo.'}`
+conn.reply(m.chat, toruAc, m)
 }
 
-handler.tags = ['nable']
-handler.command = ['welcome', 'welc', 'admind', 'adminb', 'menup', 'pmenu', 'economy', 'recurs', 'rpg', 'juegos', 'detect', 'detector', 'lind', 'durl']
-handler.group = true
+
+handler.command = ["f-welcome", "f-admin", "f-view", "f-priv", "f-acept", "f-latam", "f-refuse", "f-bot", "f-dl", "f-detect", "f-link", "f-menu", "f-rpg", "f-game"]
 
 export default handler
+
+const more = String.fromCharCode(8206)
+const readMore = more.repeat(4001)
+  
