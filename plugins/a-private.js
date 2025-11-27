@@ -6,7 +6,21 @@ if (m.sender === conn.user?.jid) return
 if (m.text.includes('PIEDRA') || m.text.includes('PAPEL') || m.text.includes('TIJERA') || m.text.includes('code') || m.text.includes('qr')) return !0
 const chat = global.db.data.chats[m.chat]
 const bot = global.db.data.settings[conn.user.jid] || {}
-let mensajito = `📍  Hola usuario @${m.sender.split('@')[0]}, lo siento, pero no puedes usar el bot en chat privado.
+let mensajito = `📍  Hola usuario @${m.sender.split('@')[0]}
+No puedes hablar en el chat privado del bot.
+
+💪🏻 Te sugerimos que uses el bot en un chat grupal, sea alojado o principal.
+
+Gracias por leer.`
+if (m.chat === '120363402356085997@newsletter') return !0
+if (bot.fPrivado && !isROwner) {
+await conn.sendMessage(m.chat, { text: mensajito, mentions: await conn.parseMention(mensajito) }, { quoted: m })
+await this.updateBlockStatus(m.chat, 'block')
+}
+return !1
+}
+
+/*📍  Hola usuario @${m.sender.split('@')[0]}, lo siento, pero no puedes usar el bot en chat privado.
 
 🔐  Por ende, seras bloqueado por romper una regla ya establecida en este bot.
 - Pero de igual modo, puedes unirte a los grupos disponibles para usar el bot.
@@ -21,11 +35,4 @@ let mensajito = `📍  Hola usuario @${m.sender.split('@')[0]}, lo siento, pero 
 
 
 • ✎ *ASISTENCIA : MX*
-- https://chat.whatsapp.com/GTuLNKByF0s9Z1ByZyGQTM?mode=wwt`
-if (m.chat === '120363402356085997@newsletter') return !0
-if (bot.fPrivado && !isROwner) {
-await conn.sendMessage(m.chat, { text: mensajito, mentions: await conn.parseMention(mensajito) }, { quoted: m })
-await this.updateBlockStatus(m.chat, 'block')
-}
-return !1
-}
+- https://chat.whatsapp.com/GTuLNKByF0s9Z1ByZyGQTM?mode=wwt*/
