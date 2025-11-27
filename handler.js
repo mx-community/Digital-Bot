@@ -105,11 +105,17 @@ if (!("sWelcome" in chat)) chat.sWelcome = ""
 if (!("sBye" in chat)) chat.sBye = ""
 if (!("detect" in chat)) chat.detect = false
 if (!("primaryBot" in chat)) chat.primaryBot = null
-if (!("modoadmin" in chat)) chat.modoadmin = false
-if (!("antiLink" in chat)) chat.antiLink = false
-if (!("nsfw" in chat)) chat.nsfw = false
-if (!("economy" in chat)) chat.economy = false
-if (!("gacha" in chat)) chat.gacha = false
+if (!("fAdmin" in chat)) chat.fAdmin = false
+if (!("fViewonce" in chat)) chat.fViewonce = false
+if (!("fAceptar" in chat)) chat.fAceptar = false
+if (!("fRechazar" in chat)) chat.fRechazar = false
+if (!("fNobot" in chat)) chat.fNobot = false
+if (!("fChatgp" in chat)) chat.fChatgp = false
+if (!("fJuegos" in chat)) chat.fJuegos = false
+if (!("fEnlaces" in chat)) chat.fEnlaces = false
+if (!("fDescargas" in chat)) chat.fDescargas = false
+if (!("fRpg" in chat)) chat.fRpg = false
+if (!("fMenu" in chat)) chat.fMenu = false
 } else global.db.data.chats[m.chat] = {
 isBanned: false,
 isMute: false,
@@ -118,11 +124,17 @@ sWelcome: "",
 sBye: "",
 detect: false,
 primaryBot: null,
-modoadmin: false,
-antiLink: false,
-nsfw: false,
-economy: false,
-gacha: false
+fAdmin: false,
+fViewonce: false,
+fAceptar: false,
+fRechazar: false,
+fNobot: false,
+fChatgp: false,
+fJuegos: false,
+fEnlaces: false,
+fDescargas: false,
+fRpg: false,
+fMenu: false
 }
 const settings = global.db.data.settings[this.user.jid]
 if (typeof settings !== "object") {
@@ -131,14 +143,14 @@ global.db.data.settings[this.user.jid] = {}
 if (settings) {
 if (!("self" in settings)) settings.self = false
 if (!("restrict" in settings)) settings.restrict = true
-if (!("jadibotmd" in settings)) settings.jadibotmd = true
-if (!("antiPrivate" in settings)) settings.antiPrivate = false
+if (!("fRentbot" in settings)) settings.fRentbot = true
+if (!("fPrivado" in settings)) settings.fPrivado = false
 if (!("gponly" in settings)) settings.gponly = false
 } else global.db.data.settings[this.user.jid] = {
 self: false,
 restrict: true,
-jadibotmd: true,
-antiPrivate: false,
+fRentbot: true,
+fPrivado: false,
 gponly: false
 }} catch (e) {
 console.error(e)
