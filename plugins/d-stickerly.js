@@ -8,10 +8,10 @@ const API_STICKERLY = "https://delirius-apiofc.vercel.app/download/stickerly"
 let handler = async (m, { conn, args, usedPrefix, command }) => {
 if (!args[0])
 return m.reply(
-`🍧 Ingresa la URL de un pack de *Stickerly*.\n\n🌱 Ejemplo:\n> ${usedPrefix + command} https://sticker.ly/s/4I2FC0`
+`Ingrese el comando mas un enlace de un pack de Sticker.ly\n\n• Por ejemplo:\n*${usedPrefix + command}* https://sticker.ly/s/MJ41LV`
 )
 
-await m.react("🕓")
+await m.react("⏰")
 
 try {
 const res = await fetch(`${API_STICKERLY}?url=${encodeURIComponent(args[0])}`)
@@ -24,17 +24,18 @@ throw new Error("⚠️ No se pudo obtener el pack. Verifica el enlace.")
 const data = json.data
 
 const info = `
-╭━━━〔 🌸 *STICKERLY PACK* 🌸 〕━━⬣
-┃ ✨ *Nombre:* ${data.name}
-┃ 👤 *Autor:* ${data.author}
-┃ 📦 *Stickers:* ${data.total}
-┃ 👀 *Vistas:* ${data.viewCount}
-┃ 📤 *Exportados:* ${data.exportCount}
-┃ 🎭 *Animado:* ${data.isAnimated ? "Sí" : "No"}
-┃ 🔗 *Enlace:* ${data.url}
-╰━━━━━━━━━━━━━━━━━━⬣
-👥 *Usuario:* ${data.username}
-👤 *Followers:* ${data.followers}
+\t〤  *S T I C K E R  :  L Y*
+
+\t⚶ *PROPIEDAD*
+\t⧡ Pack : *${data.name}*
+\t⧡ Autor : *${data.author}* (@${data.username})
+\t⧡ Seguidores : *${data.followers}* seguidores
+
+⚶ *DETALLES*
+\t⧡ Stickers : *${data.total}* stickers
+\t⧡ Vistas : *${data.viewCount}* vistas
+\t⧡ Exports : *${data.exportCount}* exportados
+\t⧡ Animados : *${data.isAnimated ? "Sí" : "No"}*
 `.trim()
 
 await conn.sendMessage(
@@ -44,11 +45,11 @@ text: info,
 contextInfo: {
 externalAdReply: {
 title: `${data.name}`,
-body: `🍃 Autor: ${data.author || "Desconocido"} • ${data.total} stickers`,
+body: botname,
 thumbnailUrl: data.preview,
 sourceUrl: data.url,
 mediaType: 1,
-renderLargerThumbnail: true,
+renderLargerThumbnail: false,
 },
 },
 },
@@ -77,17 +78,17 @@ console.log("⚠️ Error con un sticker:", err.message)
 
 await m.react("✅")
 
-m.reply(`✅ *Descarga completada*\n📦 *Stickers enviados:* ${success}\n❌ *Fallidos:* ${failed}`)
+m.reply(`✅  Se han enviado *${success}* correctamente y *${failed}* fallos.`)
 
 } catch (e) {
 console.error("❌ Error general:", e)
-m.reply("⚠️ Error al descargar los stickers del pack. Intenta con otro enlace.")
+m.reply(`📍 ${e.message}`)
 await m.react("❌")
 }
 }
 
 handler.help = ["stickerlydl <url>"]
 handler.tags = ["sticker", "download"]
-handler.command = ["stickerlydl", "stickerpack", "dls"]
+handler.command = ["sly", "stickerly"]
 
 export default handler
