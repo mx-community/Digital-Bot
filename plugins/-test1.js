@@ -75,7 +75,7 @@ voice_name
 };
 }
 
-const handler = async (m, { text, conn, command }) => {
+const handler = async (m, { text, conn, command, usedPrefix }) => {
 if (!text.includes(',')) return conn.reply(m.chat, `\t〤  *M O D E L O S*
 
 \t\t⧡ miku
