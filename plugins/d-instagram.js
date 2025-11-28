@@ -44,7 +44,6 @@ console.log(e)
 }
 }
 }
-}
 handler.help = ['instagram <link ig>']
 handler.tags = ['downloader']
 handler.command = ["instagram", "ig"]
