@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-const handler = async (m, { conn, command, args usedPrefix, text }) => {
+const handler = async (m, { conn, command, args, usedPrefix, text }) => {
 const user = global.db.data.users[m.sender] || {};
 const name = await conn.getName(m.sender);
 
