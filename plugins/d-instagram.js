@@ -68,7 +68,7 @@ const shortUrl3 = await (await fetch(`https://tinyurl.com/api-create.php?url=${a
 for (const {url} of resultssss) await conn.sendFile(m.chat, url, 'error.mp4', videoToru, m)
 } catch {
 try {
-const human = await fetch(`https://api.lolhuman.xyz/api/instagram?apikey=${lolkeysapi}&url=${args[0]}`)
+const human = await fetch(`https://api.lolhuman.xyz/api/instagram?apikey=GataDiosV3&url=${args[0]}`)
 const json = await human.json()
 const videoig = json.result
 const shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()
