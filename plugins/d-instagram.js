@@ -38,16 +38,6 @@ await conn.sendFile(m.chat, downloadUrl, 'ig.mp4', videoToru, m, null)
 } else {
 return m.react('❌')
 }
-} catch {
-try {
-const apiUrll = `https://api.betabotz.org/api/download/igdowloader?url=${encodeURIComponent(args[0])}&apikey=bot-secx3`
-const responsel = await axios.get(apiUrll)
-const resultl = responsel.data
-for (const item of resultl.message) {
-const shortUrRRl = await (await fetch(`https://tinyurl.com/api-create.php?url=${item.thumbnail}`)).text()
-conn.sendFile(m.chat, item._url, null, conToru, m)
-await new Promise((resolve) => setTimeout(resolve, 10000))
-}
 } catch (e) {
 await conn.reply(m.chat, `📍 ${e.message}`, m)
 console.log(e)
