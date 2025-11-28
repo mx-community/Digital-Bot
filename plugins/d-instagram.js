@@ -48,18 +48,9 @@ const shortUrRRl = await (await fetch(`https://tinyurl.com/api-create.php?url=${
 conn.sendFile(m.chat, item._url, null, conToru, m)
 await new Promise((resolve) => setTimeout(resolve, 10000))
 }
-} catch {
-try {
-const datTa = await instagram.v1(args[0])
-for (const urRRl of datTa) {
-const shortUrRRl = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()
-conn.sendFile(m.chat, urRRl.url, 'error.mp4', videoToru, m)
-await new Promise((resolve) => setTimeout(resolve, 10000))
-}
 } catch (e) {
 await conn.reply(m.chat, `📍 ${e.message}`, m)
 console.log(e)
-}
 }
 }
 }
