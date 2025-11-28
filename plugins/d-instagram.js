@@ -56,21 +56,9 @@ const shortUrRRl = await (await fetch(`https://tinyurl.com/api-create.php?url=${
 conn.sendFile(m.chat, urRRl.url, 'error.mp4', videoToru, m)
 await new Promise((resolve) => setTimeout(resolve, 10000))
 }
-} catch {
-try {
-const resultss = await instagramGetUrl(args[0]).url_list[0]
-const shortUrl2 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()
-await conn.sendFile(m.chat, resultss, 'error.mp4', videoToru, m)
-} catch {
-try {
-const resultssss = await instagramdl(args[0])
-const shortUrl3 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()
-for (const {url} of resultssss) await conn.sendFile(m.chat, url, 'error.mp4', videoToru, m)
 } catch (e) {
 await conn.reply(m.chat, `📍 ${e.message}`, m)
 console.log(e)
-}
-}
 }
 }
 }
@@ -80,4 +68,4 @@ handler.help = ['instagram <link ig>']
 handler.tags = ['downloader']
 handler.command = ["instagram", "ig"]
 export default handler
-  
+           
