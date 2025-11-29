@@ -1,6 +1,6 @@
 let handler = async (m, { conn, usedPrefix, command }) => {
-if (!db.data.chats[m.chat].economy && m.isGroup) {
-return conn.sendMessage(m.chat, { text: `⦗ ᗢ ⦘ El comando *${usedPrefix + command}* está desactivado en este grupo.\n- Activalo si eres admin de la siguiente manera.\n\n• Por ejemplo:\n*${usedPrefix}rpg on*` }, { quoted: m })
+if (!db.data.chats[m.chat].fRpg && m.isGroup) {
+return conn.sendMessage(m.chat, { text: `⦗ ᗢ ⦘ El comando *${usedPrefix + command}* está desactivado en este grupo.\n- Activalo si eres admin de la siguiente manera.\n\n• Por ejemplo:\n*${usedPrefix}f-rpg on*` }, { quoted: m })
 }
 let user = global.db.data.users[m.sender]
 const cooldown = 2 * 60 * 1000
