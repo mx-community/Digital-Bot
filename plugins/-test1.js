@@ -1,81 +1,87 @@
-import cheerio from 'cheerio';
-import axios from 'axios';
+import fs from 'fs';
+import archiver from 'archiver';
+const handler = async (m, {conn, args, usedPrefix, command, text}) => {
+let who
+if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text
+else who = m.chat
 
-let handler = async (m, { conn, text, usedPrefix }) => {
-  if (!text) return conn.reply(m.chat, '🌿 Ingresa el nombre de la aplicación que deseas buscar.\n\nEjemplo:\n' + `> *${usedPrefix}playstore1* whatsapp`, m, rcanal);
+if (command === 'base') {
+//Base de datos simple
+//conn.sendMessage(m.chat, { text: `ⴵ Procesando base de datos...` }, { quoted: m });
+await m.react("⏰")
+const db = await fs.readFileSync('./database.json');
+return await conn.sendMessage(m.chat, {document: db, mimetype: 'application/json', fileName: 'database.json'}, {quoted: m});
+await m.react("✅")
+}
 
-  await m.react('🕓');
+if (command === 'base2' || command === 'json') {
+//Base de datos basado en programas.
+const databaseFolder = './database';
+const zipPath = './database_backup.zip';
+let option = parseInt(text);
+if (![1, 2].includes(option)) return await conn.sendMessage(m.chat, { text: `Debe de usar el comando de la siguiente manera.\n\n• *Por ejemplo:*\n#${command} cs\n#${command} db` }, { quoted: m });
+try {
+let d = new Date();
+let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' });
+if (option === 'cs') {  
+const path = conn.user.jid !== global.conn.user.jid ? `./MdmxSesion/${conn.user.jid.split`@`[0]}/creds.json` : `./MdmxDirector/creds.json`;
+if (!fs.existsSync(path)) return await conn.sendMessage(m.chat, { text: `✘ The 'creds.json' file does not exist...` }, { quoted: m });
+let creds = fs.readFileSync(path);
+await conn.sendMessage(m.chat, { text: `ⴵ Procesando archivo 'creds.json', aguarde....` }, { quoted: m });
+await conn.sendMessage(m.sender, { document: creds, mimetype: 'application/json', fileName: `creds.json` }, { quoted: m });
+} else if (option === 'db') { 
+if (!fs.existsSync(databaseFolder)) return await conn.sendMessage(m.chat, { text: `✘ The 'database.json' file does not exist...` }, { quoted: m });
+await conn.sendMessage(m.chat, { text: `ⴵ Procesando archivo 'database.json', aguarde...` }, { quoted: m });
+const output = fs.createWriteStream(zipPath);
+const archive = archiver('zip', { zlib: { level: 9 } });
+output.on('close', async () => {
+console.log(`New file: ${archive.pointer()} bytes`);
+await conn.sendMessage(m.sender, { document: fs.readFileSync(zipPath), mimetype: 'application/zip', fileName: `database.zip` }, { quoted: m });
+fs.unlinkSync(zipPath);
+});
+archive.on('error', (err) => { throw err; });
+archive.pipe(output);
+archive.directory(databaseFolder, false);
+archive.finalize();
+}
+} catch (e) {
+await conn.sendMessage(m.chat, { text: `📍 ${e.message}` }, { quoted: m })
+console.log(e)
+}
+}
 
-  const PlayStore = async (search) => {
-    try {
-      const { data } = await axios.get(`https://play.google.com/store/search?q=${search}&c=apps`);
-      const resultados = [];
-      const $ = cheerio.load(data);
-      
-      $('.ULeU3b > .VfPpkd-WsjYwc.VfPpkd-WsjYwc-OWXEXe-INsAgc.KC1dQ.Usd1Ac.AaN0Dd.Y8RQXd > .VfPpkd-aGsRMb > .VfPpkd-EScbFb-JIbuQc.TAQqTe > a').each((i, u) => {
-        const linkk = $(u).attr('href');
-        const nombre = $(u).find('.j2FCNc > .cXFu1 > .ubGTjb > .DdYX5').text();
-        const desarrollador = $(u).find('.j2FCNc > .cXFu1 > .ubGTjb > .wMUdtb').text();
-        const calificacion = $(u).find('.j2FCNc > .cXFu1 > .ubGTjb > div').attr('aria-label');
-        const calificacionTexto = $(u).find('.j2FCNc > .cXFu1 > .ubGTjb > div > span.w2kbF').text();
-        const link = `https://play.google.com${linkk}`;
+if (command === '-vip' || command === '-premium') {
+if (!who) return conn.sendMessage(m.chat, { text: `Ingrese el comando y mensiona a un usuario premium para quitar su puesto premium.\n\n• *Por ejemplo:*\n${usedPrefix}${command} @${m.sender.split`@`[0]}`, mentions: [m.sender] }, { quoted: m });
+if (!global.prems.includes(who.split`@`[0])) return conn.sendMessage(m.chat, { text: `📍  El usuario mensionado no es un usuario premium.\n- Busca usuarios premium con la lista: *${usedPrefix}list prem*` }, { quoted: m });
+let index = global.prems.findIndex(v => (v.replace(/[^0-9]/g, '') + '@s.whatsapp.net') === (who.replace(/[^0-9]/g, '') + '@s.whatsapp.net'));
+await m.react("⏰")
+global.prems.splice(index, 1);
+conn.sendMessage(m.chat, { text: `✅  El usuario @${who.split`@`[0]} fue descartado de los usuarios premium con exito.`, mentions: [who] }, { quoted: m });
+await m.react("✅")
+}
 
-        resultados.push({
-          link: link,
-          nombre: nombre || 'Sin nombre',
-          desarrollador: desarrollador || 'Sin desarrollador',
-          img: 'https://files.catbox.moe/dklg5y.jpg', 
-          calificacion: calificacion || 'Sin calificación',
-          calificacionTexto: calificacionTexto || 'Sin calificación',
-          link_desarrollador: `https://play.google.com/store/apps/developer?id=${desarrollador.split(" ").join('+')}`
-        });
-      });
+if (command === '-mod' || command === '-moderator') {
+if (!who) return conn.sendMessage(m.chat, { text: `Ingrese el comando y mensiona a un usuario moderador para quitar su puesto moderador.\n\n• *Por ejemplo:*\n${usedPrefix}${command} @${m.sender.split`@`[0]}`, mentions: [m.sender] }, { quoted: m });
+if (!global.mods.includes(who.split`@`[0])) return conn.sendMessage(m.chat, { text: `📍  El usuario mensionado no es un usuario moderador.\n- Busca usuarios moderadores con la lista: *${usedPrefix}list mod*` }, { quoted: m });
+let index = global.mods.findIndex(v => (v.replace(/[^0-9]/g, '') + '@s.whatsapp.net') === (who.replace(/[^0-9]/g, '') + '@s.whatsapp.net'));
+await m.react("⏰")
+global.mods.splice(index, 1);
+conn.sendMessage(m.chat, { text: `✅  El usuario @${who.split`@`[0]} fue descartado de los usuarios moderadores con exito.`, mentions: [who] }, { quoted: m });
+await m.react("✅")
+}
 
-      return resultados.length ? resultados.slice(0, Math.min(5, resultados.length)) : { message: 'No se encontraron resultados' };
-    } catch (error) {
-      console.error(error);
-      throw new Error('Error en la búsqueda de Play Store');
-    }
-  };
+if (command === '-admin' || command === '-administrador') {
+if (!who) return conn.sendMessage(m.chat, { text: `Ingrese el comando y mensiona a un usuario administrador del bot para quitar su puesto admin.\n\n• *Por ejemplo:*\n${usedPrefix}${command} @${m.sender.split`@`[0]}`, mentions: [m.sender] }, { quoted: m });
+if (!global.owner.includes(who.split`@`[0])) return conn.sendMessage(m.chat, { text: `✅  El usuario mensionado no es un usuario administrador del bot.\n- Busca usuarios admins del bot con la lista: *${usedPrefix}list admin*` }, { quoted: m });
+let index = global.owner.findIndex(v => (v.replace(/[^0-9]/g, '') + '@s.whatsapp.net') === (who.replace(/[^0-9]/g, '') + '@s.whatsapp.net'));
+await m.react("⏰")
+global.owner.splice(index, 1);
+conn.sendMessage(m.chat, { text: `✓ _El usuario @${who.split`@`[0]} fue descartado de los usuarios administradores del con exito._`, mentions: [who] }, { quoted: m });
+await m.react("✅")
+}
 
-  try {
-    const resultados = await PlayStore(text);
-    if (resultados.message) return m.reply(resultados.message);
-
-    let txt = `*💙 Resultados de la búsqueda en Play Store para "${text}"*\n\n`;
-    for (let app of resultados) {
-      txt += `🌿 *Nombre:* ${app.nombre}\n`;
-      txt += `💮 *Desarrollador:* ${app.desarrollador}\n`;
-      txt += `✨ *Calificación:* ${app.calificacionTexto} (${app.calificacion})\n`;
-      txt += `🔥 *Link:* ${app.link}\n`;
-      txt += `🍋 *Link del Desarrollador:* ${app.link_desarrollador}\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-    }
-
-    await conn.sendMessage(m.chat, { 
-      text: txt,
-      contextInfo: {
-        externalAdReply: {
-          title: resultados[0].nombre,
-          body: `Resultados de búsqueda de Play Store - ${text}`,
-          thumbnailUrl: 'https://files.catbox.moe/dklg5y.jpg',
-          sourceUrl: resultados[0].link,
-          mediaType: 1,
-          renderLargerThumbnail: true
-        }
-      }
-    });
-    
-    await m.react('✔️');
-  } catch (error) {
-    console.error(error);
-    m.reply('Ocurrió un error durante la búsqueda.');
-    await m.react('✖️');
-  }
 };
-
-handler.help = ['playstore *<query>*'];
-handler.tags = ['search'];
-handler.command = ['playstore', 'ps'];
-handler.limit = false;
-
+handler.command = /^(ls|bs)$/i;
+handler.owner = true;
 export default handler;
+                                       
