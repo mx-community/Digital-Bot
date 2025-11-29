@@ -1,17 +1,48 @@
-import fetch from 'node-fetch'
-const handler = async (m, { conn, command, args, usedPrefix, text }) => {
-const user = global.db.data.users[m.sender] || {};
-const name = await conn.getName(m.sender);
 
-if (command === "rw" || command === "c" || command === "claim" || command === "harem" || command === "votec" || command === "wimage" || command === "winfo") {
-let infoXd = `\t〤  *U P D A T E*
-
-📍 \`\`\`Estos comandos estan en actualización, esperamos y puedas comprender.\`\`\``
-await conn.reply(m.chat, infoXd, m)
-};
-
-};
-
-handler.command = ['rw', 'c', 'claim', 'harem', 'votec', 'wimage', 'winfo'];
-
-export default handler;
+//Codigo creado por GataNina-Li
+let handler = async (m, { conn, usedPrefix, command, args: [event], text }) => {
+if (!event) return await conn.reply(m.chat, `mencione a un usuario.`, m)
+//conn.sendButton(m.chat, ``, wm, null, [[esmsMT.bnVer(), '#simulate']], null, null, fkontak, m)
+let mentions = text.replace(event, '').trimStart()
+let who = mentions ? conn.parseMention(mentions) : []
+let part = who.length ? who : [m.sender]
+let act = false
+m.reply(`xd`)
+switch (event.toLowerCase()) {
+case 'add':
+case 'invite':
+case 'welcome':
+case 'bienvenida':       
+act = 'add'
+break
+case 'bye':
+case 'kick':
+case 'leave':
+case 'remove':
+case 'sacar':
+act = 'remove'
+break
+case 'promote':
+case 'daradmin':
+case 'darpoder':
+act = 'promote'
+break
+case 'demote':
+case 'quitaradmin':
+case 'quitarpoder':
+act = 'demote'
+break
+default:
+conn.reply(m.chat, `listo`, m)
+}
+if (act) return conn.participantsUpdate({
+id: m.chat,
+participants: part,
+action: act
+})}
+handler.help = ['simulate <event> [@mention]','simular <event>'] 
+handler.tags = ['owner']
+handler.command = /^simulate|simular$/i
+handler.group = true
+export default handler
+    
