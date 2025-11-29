@@ -1,7 +1,7 @@
 import moment from 'moment-timezone'
 let handler = async (m, { conn, command, usedPrefix }) => {
-if (!db.data.chats[m.chat].economy && m.isGroup) {
-return conn.sendMessage(m.chat, { text: `⦗ ᗢ ⦘ El comando *${usedPrefix + command}* está desactivado en este grupo.\n- Activalo si eres admin de la siguiente manera.\n\n• Por ejemplo:\n*${usedPrefix}rpg on*` }, { quoted: m })
+if (!db.data.chats[m.chat].fRpg && m.isGroup) {
+return conn.sendMessage(m.chat, { text: `⦗ ᗢ ⦘ El comando *${usedPrefix + command}* está desactivado en este grupo.\n- Activalo si eres admin de la siguiente manera.\n\n• Por ejemplo:\n*${usedPrefix}f-rpg on*` }, { quoted: m })
 }
 let thumb = Buffer.from(await (await fetch(`${global.mMages}`)).arrayBuffer())
 let hora = `${moment.tz('America/Buenos_Aires').format('HH:mm:ss')}`
