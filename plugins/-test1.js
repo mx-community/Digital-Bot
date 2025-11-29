@@ -1,108 +1,80 @@
-import fetch from "node-fetch";
-import axios from "axios";
+import axios from 'axios';
 
-let handler = async (m, { conn, text, args }) => {
+let handler = async (m, { conn, text, usedPrefix }) => {
+  if (!text) return conn.reply(m.chat, '🌿 Ingresa el nombre de la aplicación que deseas buscar.\n\nEjemplo:\n' + `> *${usedPrefix}playstore1* whatsapp`, m, rcanal);
+
+  await m.react('🕓');
+
+  const PlayStore = async (search) => {
+    try {
+      const { data } = await axios.get(`https://play.google.com/store/search?q=${search}&c=apps`);
+      const resultados = [];
+      const $ = cheerio.load(data);
+      
+      $('.ULeU3b > .VfPpkd-WsjYwc.VfPpkd-WsjYwc-OWXEXe-INsAgc.KC1dQ.Usd1Ac.AaN0Dd.Y8RQXd > .VfPpkd-aGsRMb > .VfPpkd-EScbFb-JIbuQc.TAQqTe > a').each((i, u) => {
+        const linkk = $(u).attr('href');
+        const nombre = $(u).find('.j2FCNc > .cXFu1 > .ubGTjb > .DdYX5').text();
+        const desarrollador = $(u).find('.j2FCNc > .cXFu1 > .ubGTjb > .wMUdtb').text();
+        const calificacion = $(u).find('.j2FCNc > .cXFu1 > .ubGTjb > div').attr('aria-label');
+        const calificacionTexto = $(u).find('.j2FCNc > .cXFu1 > .ubGTjb > div > span.w2kbF').text();
+        const link = `https://play.google.com${linkk}`;
+
+        resultados.push({
+          link: link,
+          nombre: nombre || 'Sin nombre',
+          desarrollador: desarrollador || 'Sin desarrollador',
+          img: 'https://files.catbox.moe/dklg5y.jpg', 
+          calificacion: calificacion || 'Sin calificación',
+          calificacionTexto: calificacionTexto || 'Sin calificación',
+          link_desarrollador: `https://play.google.com/store/apps/developer?id=${desarrollador.split(" ").join('+')}`
+        });
+      });
+
+      return resultados.length ? resultados.slice(0, Math.min(5, resultados.length)) : { message: 'No se encontraron resultados' };
+    } catch (error) {
+      console.error(error);
+      throw new Error('Error en la búsqueda de Play Store');
+    }
+  };
+
   try {
-    if (!text) return conn.reply(m.chat, `🌷 *Ingresa la URL del video de YouTube.*`, m);
+    const resultados = await PlayStore(text);
+    if (resultados.message) return m.reply(resultados.message);
 
-    await conn.sendMessage(m.chat, { text: `🍃 *Descargando tu video...*` }, { quoted: m });
-
-    if (!/^(?:https?:\/\/)?(?:www\.|m\.|music\.)?youtu\.?be/.test(args[0])) {
-      return conn.reply(m.chat, `❌ *Enlace inválido.*`, m);
+    let txt = `*💙 Resultados de la búsqueda en Play Store para "${text}"*\n\n`;
+    for (let app of resultados) {
+      txt += `🌿 *Nombre:* ${app.nombre}\n`;
+      txt += `💮 *Desarrollador:* ${app.desarrollador}\n`;
+      txt += `✨ *Calificación:* ${app.calificacionTexto} (${app.calificacion})\n`;
+      txt += `🔥 *Link:* ${app.link}\n`;
+      txt += `🍋 *Link del Desarrollador:* ${app.link_desarrollador}\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n`;
     }
 
-    await conn.sendMessage(m.chat, { react: { text: '⌛', key: m.key } });
-
-    let apiURL = `https://api-shadowxyz.vercel.app/download/ytmp4V2?url=${encodeURIComponent(args[0])}`;
-    let data = await tryAPI(apiURL);
-
-    if (!data?.status || !data?.result?.download_url) {
-      return conn.reply(m.chat, `❌ *La API falló.*`, m);
-    }
-
-    const { title, duration, download_url } = data.result;
-
-    const size = await getSize(download_url);
-    const sizeStr = size ? await formatSize(size) : 'Desconocido';
-
-    const cleanTitle = title.replace(/[^\w\s]/gi, '').trim().replace(/\s+/g, '_');
-    const fileName = `${cleanTitle}.mp4`;
-
-    const caption = `
-🎁 *Youtube MP4 V2* ✨  
-────────────────  
-☃️ *Título:* ${title}  
-🦌 *Duración:* ${duration}  
-🛷 *Tamaño:* ${sizeStr}  
-────────────────`;
-
-    let head = await fetch(download_url, { method: "HEAD" });
-    let fileSize = head.headers.get("content-length") || 0;
-    let fileSizeMB = (fileSize / (1024 * 1024)).toFixed(2);
-
-    if (fileSizeMB >= 100) {
-      await conn.sendMessage(m.chat, {
-        document: { url: download_url },
-        mimetype: 'video/mp4',
-        fileName,
-        caption: `${caption}\n✨ *Enviado como documento (archivo grande)*`
-      }, { quoted: m });
-    } else {
-      await conn.sendMessage(m.chat, {
-        video: { url: download_url },
-        mimetype: 'video/mp4',
-        caption
-      }, { quoted: m });
-    }
-
-    await conn.sendMessage(m.chat, { react: { text: '✔️', key: m.key } });
-
-  } catch (e) {
-    console.error(e);
-    m.reply(`❌ *Error:* ${e.message}`);
+    await conn.sendMessage(m.chat, { 
+      text: txt,
+      contextInfo: {
+        externalAdReply: {
+          title: resultados[0].nombre,
+          body: `Resultados de búsqueda de Play Store - ${text}`,
+          thumbnailUrl: 'https://files.catbox.moe/dklg5y.jpg',
+          sourceUrl: resultados[0].link,
+          mediaType: 1,
+          renderLargerThumbnail: true
+        }
+      }
+    });
+    
+    await m.react('✔️');
+  } catch (error) {
+    console.error(error);
+    m.reply('Ocurrió un error durante la búsqueda.');
+    await m.react('✖️');
   }
 };
 
-handler.help = ['ytmp42 <url>'];
-handler.tags = ['download'];
-handler.command = ['ytmp42'];
-handler.group = true;
+handler.help = ['playstore *<query>*'];
+handler.tags = ['search'];
+handler.command = ['playstore', 'ps'];
+handler.limit = false;
 
 export default handler;
-
-
-async function tryAPI(url) {
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    if (data?.status) return data;
-  } catch {}
-
-  try {
-    const res = await fetch(url);
-    return await res.json();
-  } catch {
-    return null;
-  }
-}
-
-async function formatSize(bytes) {
-  const units = ['B', 'KB', 'MB', 'GB'];
-  let i = 0;
-  if (!bytes || isNaN(bytes)) return 'Desconocido';
-  while (bytes >= 1024 && i < units.length - 1) {
-    bytes /= 1024;
-    i++;
-  }
-  return `${bytes.toFixed(2)} ${units[i]}`;
-}
-
-async function getSize(url) {
-  try {
-    const res = await axios.head(url);
-    const length = res.headers['content-length'];
-    return length ? parseInt(length, 10) : null;
-  } catch {
-    return null;
-  }
-  }
