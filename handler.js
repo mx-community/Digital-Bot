@@ -47,12 +47,17 @@ if (!("health" in user) || !isNumber(user.health)) user.health = 100
 if (!("genre" in user)) user.genre = ""
 if (!("birth" in user)) user.birth = ""
 if (!("misocial" in user)) user.misocial = ""
+if (!("mifoto" in user)) user.mifoto = ""
 if (!("marry" in user)) user.marry = ""
 if (!("description" in user)) user.description = ""
 if (!("packstickers" in user)) user.packstickers = null
 if (!("premium" in user)) user.premium = false
+if (!("administ" in user)) user.administ = false
+if (!("moderador" in user)) user.moderador = false
 if (!('registered' in user)) user.registered = false
 if (!("premiumTime" in user)) user.premiumTime = 0
+if (!("administTime" in user)) user.administTime = 0
+if (!("moderadorTime" in user)) user.moderadorTime = 0
 if (!("banned" in user)) user.banned = false
 if (!("bannedReason" in user)) user.bannedReason = ""
 if (!("commands" in user) || !isNumber(user.commands)) user.commands = 0
@@ -80,11 +85,16 @@ health: 100,
 genre: "",
 birth: "",
 misocial: "",
+mifoto: "",
 marry: "",
 description: "",
 packstickers: null,
 premium: false,
+administ: false,
+moderador: false,
 premiumTime: 0,
+administTime: 0,
+moderadorTime: 0,
 banned: false,
 bannedReason: "",
 commands: 0,
