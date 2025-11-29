@@ -1,3 +1,4 @@
+import cheerio from 'cheerio';
 import axios from 'axios';
 
 let handler = async (m, { conn, text, usedPrefix }) => {
