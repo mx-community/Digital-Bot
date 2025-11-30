@@ -92,9 +92,7 @@ let caption = "";
 const maxSize = 10 * 1024 * 1024;
 
 if (result.type === "video" || result.type === "gif") {
-caption = `\t〨  *P I N T E R E S T*
-
-\t⸭ ✅ ${result.name || result.headline || "Undefined"}\n`;
+caption = `🎬  *download-video_pinterest.mp4*`;
 const buffer = await downloadBuffer(result.contentUrl || result.gif);
 if (buffer.length > maxSize) {
 caption += `📍  No se pudo descargar el video.\n- El limite maximo es de *10 MB*, intente con otro video.`;
@@ -104,9 +102,7 @@ await conn.sendMessage(m.chat, { video: buffer, caption, mimetype: "video/mp4" }
 }
 
 } else if (result.type === "image") {
-caption = `\t〨  *P I N T E R E S T*
-
-\t⸭ ✅ ${result.headline || "Undefined."}\n`;
+caption = `🖼️  *download-image_pinterest.jpg*`;
 await conn.sendMessage(m.chat, { image: { url: result.image }, caption }, { quoted: m });
 }
 
