@@ -7,7 +7,7 @@ let optionsXd = `\t〤  *T I K T O K  :  D L*
 \t⸭ 📌 \`\`\`Descargas de tiktok.\`\`\`
 
 \t\t⧡ ${usedPrefix}tiktok : *<link>*
-\t\t⧡ ${usedPrefix}tiktoks : *<link>*
+\t\t⧡ ${usedPrefix}tiktoks : *<text>*
 \t\t⧡ ${usedPrefix}p-tiktok : *<link>*
 \t\t⧡ ${usedPrefix}a-tiktok : *<link>*`
 
