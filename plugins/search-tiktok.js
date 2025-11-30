@@ -50,9 +50,9 @@ function createCaption(title, author, duration, created_at = '') {
 function createSearchCaption(data) {
 return `·─┄ · ✦ *TikTok : Search* ✦ ·
 
-⏍ Busquedas : *${text}*
+⏍ Tipo : *Search*
 ⏍ Fuente : *TikTok*
-⏍ Resultados : *${results.length}* videos`
+⏍ Resultados : *10* videos`
 }
 
 handler.help = ['tiktoks', 'tts']
