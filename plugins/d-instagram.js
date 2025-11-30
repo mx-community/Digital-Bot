@@ -8,9 +8,9 @@ let ponloXd = `\t〤  *I N S T A G R A M*
 \t⚶ Por ejemplo:
 *${usedPrefix + command}* https://www.instagram.com/xxxx/xxxx/xxxx`
 if (!args[0]) conn.sendMessage(m.chat, { text: ponloXd }, { quoted: m })
-let videoToru = `\t〤  *I N S T A G R A M*\n\n\t⸭ ✅ \`\`\`Video descargado de Instagram.\`\`\``
-let imageToru = `\t〤  *I N S T A G R A M*\n\n\t\t⸭ ✅ \`\`\`Imagen descargada de Instagram.\`\`\``
-let conToru = `\t〤  *I N S T A G R A M*\n\n\t\t⸭ ✅ \`\`\`Contenido descargado de Instagram.\`\`\``
+let videoToru = `🎬  *download-instagram_video.mp4*`
+let imageToru = `🖼️  *donwload-instagram_image.jpg*`
+let conToru = `📥  *donwload-instagram_file*`
 await m.react("⏰")
 try {
 const res = await fetch(`https://api.siputzx.my.id/api/d/igdl?url=${args}`)
