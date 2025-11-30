@@ -5,7 +5,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 try {
 if (!args[0]) {
 return conn.reply(m.chat,
-`\t〨  *F A C E B O O K*
+`\t〤  *F A C E B O O K*
 
 \t⸭ 📍 \`\`\`Proporciona un enlace de Facebook\`\`\`
 
@@ -20,7 +20,7 @@ return conn.reply(m.chat, `📍  El enlace proporcionado no es valido.\n- Copia 
 
 await m.react("⏰")
 const apiUrl = `https://mayapi.ooguy.com/facebook?url=${encodeURIComponent(url)}&apikey=may-f53d1d49`
-console.log('🔗 Solicitando a API:', apiUrl)
+//console.log('🔗 Solicitando a API:', apiUrl)
 
 const response = await fetch(apiUrl, {
 timeout: 30000
@@ -54,12 +54,10 @@ videoTitle = data.data.title || 'Video de Facebook'
 throw new Error('📍  No se encontró URL del video en la respuesta')
 }
 
-console.log('🎬 URL del video encontrada:', videoUrl)
-console.log('📝 Título:', videoTitle)
+//console.log('🎬 URL del video encontrada:', videoUrl)
+//console.log('📝 Título:', videoTitle)
 
-let tituloXd = `\t〨  *F A C E B O O K*
-
-\t⸭ ✅ ${textbot}`
+let tituloXd = `🎬  *download-facebook_video.mp4*`
 await conn.sendMessage(m.chat, { video: { url: videoUrl }, caption: tituloXd }, { quoted: m })
 await m.react('✅')
 } catch (error) {
