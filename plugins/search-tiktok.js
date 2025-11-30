@@ -48,7 +48,11 @@ function createCaption(title, author, duration, created_at = '') {
   return `·─┄ · ✦ *TikTok : Search* ✦ ·\n\n⏍ *Titulo:* ${title || 'Desconocido.'} / ${created_at || "Undefined Date."}\nⴵ *Duración:* ${duration || "Undefined."}\n🜲 *Creador:* ${author?.unique_id} *(@${author?.nickname})`
 }
 function createSearchCaption(data) {
-return `·─┄ · ✦ *TikTok : Search* ✦ ·\n\n⏍ *Titulo:* ${data.title || 'Desconocido.'}\nⴵ *Duración:* ${data.duration || 'Undefined.'}\n🜲 *Creador:* ${data.author?.unique_id} *(@${data.author?.nickname})*`
+return `·─┄ · ✦ *TikTok : Search* ✦ ·
+
+⏍ Busquedas : *${text}*
+⏍ Fuente : *TikTok*
+⏍ Resultados : *${results.length}* videos`
 }
 
 handler.help = ['tiktoks', 'tts']
