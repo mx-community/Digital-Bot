@@ -77,17 +77,9 @@ if (!videos.length) return conn.reply(m.chat, '📍  No han se encontraron resul
 
 ytCache[m.sender] = { results: videos, timestamp: Date.now() }
 
-let caption = `·─┄ · ✦ *Search : YouTube* ✦ ·
-
-\t\t⧡ Busqueda : *${text}*
-\t\t⧡ Resultados : *15*
-
-📍  Responda a este mensaje con *V* o *A* con su número.
-
-\t⚶ Por ejemplo:
-v1
-a1`
-
+let caption = `·─┄ · ✦ *Search : YouTube* ✦ ·\n\n`
+caption += `\t\t⧡ Busqueda : *${text}*\n\t\t⧡ Resultados : *15*\n\n📍  Responda a este mensaje con *V* o *A* con su número.\n\n`
+caption += `\n\t⚶ Por ejemplo:\nv1\na1\n\n---------------\n\n`
 for (let i = 0; i < videos.length; i++) {
 const v = videos[i]
 caption += `\t⚶ *${i + 1}:* ${v.title}\n`
@@ -130,7 +122,7 @@ const size = await getSize(apiData.link)
 const mb = size / (1024 * 1024)
 const sendAsDoc = mb > MAX_FILE_SIZE_MB
 
-const caption = `📡 *${video.title}*\n🌾 *Duración:* ${video.timestamp || 'Desconocida'}\n💮 *Tamaño:* ${formatSize(size)}`
+//const caption = `📡 *${video.title}*\n🌾 *Duración:* ${video.timestamp || 'Desconocida'}\n💮 *Tamaño:* ${formatSize(size)}`
 
 if (sendAsDoc) {
 await conn.sendMessage(m.chat, { document: { url: apiData.link }, fileName: `${video.title}.${apiData.format}`, mimetype: type === 'audio' ? 'audio/mpeg' : 'video/mp4', caption: `🎬  *download-youtube_video.mp4*  [doc]` }, { quoted: m } )
