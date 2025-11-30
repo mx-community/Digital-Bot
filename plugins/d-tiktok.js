@@ -2,11 +2,12 @@ import fetch from 'node-fetch'
 import yts from 'yt-search'
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
-let optionsXd = `\t〨  *T I K T O K  :  D L*
+let optionsXd = `\t〤  *T I K T O K  :  D L*
 
 \t⸭ 📌 \`\`\`Descargas de tiktok.\`\`\`
 
 \t\t⧡ ${usedPrefix}tiktok : *<link>*
+\t\t⧡ ${usedPrefix}tiktoks : *<link>*
 \t\t⧡ ${usedPrefix}p-tiktok : *<link>*
 \t\t⧡ ${usedPrefix}a-tiktok : *<link>*`
 
@@ -23,17 +24,7 @@ let json = await res.json()
 if (!json || json.code !== 0 || !json.data) return conn.sendMessage(m.chat, { text: `📍  No se han encontrado resultados en el enlace.` }, { quoted: m })
 const data = json.data
 const { id, region, title, cover, origin_cover, duration, play, wmplay, music, music_info, play_count, digg_count, comment_count, share_count, download_count, author, images, create_time } = data
-let titulott = `\t〨  *T I K T O K  :  D L*
-
-\t⸭ ✅ ${title}
-
-\t\t⧡ ID : *${id}*
-\t\t⧡ Duracion : *${duration}* s/m
-\t\t⧡ Comentarios : *${comment_count}*
-\t\t⧡ Compartidos : *${share_count}*
-\t\t⧡ Descargas : *${download_count}*
-
-> ${textbot}`
+let titulott = `🎬  *download-tiktok_video.mp4*`
 await m.react("⏰")
 await conn.sendMessage(m.chat, { video: { url: play }, caption: titulott, gifPlayback: false, jpegThumbnail: Buffer.from(await (await fetch(cover)).arrayBuffer()) }, { quoted: m })
 await m.react("✅")
