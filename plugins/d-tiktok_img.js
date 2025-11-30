@@ -1,13 +1,14 @@
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
-let optionsXd = `\t〨  *T I K T O K  :  D L*
+let optionsXd = `\t〤  *T I K T O K  :  D L*
 
 \t⸭ 📌 \`\`\`Descargas de tiktok.\`\`\`
 
-\t\t⧡ ${usedPrefix}tiktok *<link>*
-\t\t⧡ ${usedPrefix}p-tiktok *<link>*
-\t\t⧡ ${usedPrefix}a-tiktok *<link>*
+\t\t⧡ ${usedPrefix}tiktok : *<link>*
+\t\t⧡ ${usedPrefix}tiktoks : *<text>*
+\t\t⧡ ${usedPrefix}p-tiktok : *<link>*
+\t\t⧡ ${usedPrefix}a-tiktok : *<link>*
 
 ⚶ Por ejemplo:
 ${usedPrefix + command} https://vm.tiktok.com/ZNR1YX8Dm/
@@ -26,7 +27,7 @@ if (!json || json.code !== 0 || !json.data) return conn.sendMessage(m.chat, { te
 const data = json.data
 const { id, region, title, cover, origin_cover, duration, play, wmplay, music, music_info, play_count, digg_count, comment_count, share_count, download_count, author, images, create_time } = data
 if (images && images.length > 0) {
-let infoXd = `\t〨  *T I K T O K  :  D L*
+let infoXd = `\t〤  *T I K T O K  :  D L*
 
 \t⸭ ✅ ${title}
 
