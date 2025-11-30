@@ -1,9 +1,11 @@
 import fetch from 'node-fetch'
 import yts from 'yt-search'
 import axios from 'axios'
+
 const MAX_FILE_SIZE_MB = 80
 const CACHE_TIME = 10 * 60 * 1000
 let ytCache = {}
+
 function formatNumber(num) {
 return num.toLocaleString('en-US')
 }
@@ -28,75 +30,76 @@ i++
 return `${bytes.toFixed(2)} ${units[i]}`
 }
 
-async function getStellar(url) {
+async function getshadowa(url) {
 try {
-const api = `https://api.stellarwa.xyz/dl/ytdl?url=${encodeURIComponent(url)}&format=mp3&key=Shadow_Core`
+const api = `https://api-shadowxyz.vercel.app/download/ytmp3V2?url=${encodeURIComponent(url)}`
 const res = await fetch(api)
 const data = await res.json()
 
-if (data?.status && data?.data?.dl) {
+if (data?.status === true && data?.result?.download_url) {
 return {
-link: data.data.dl,
+link: data.result.download_url,
 format: 'mp3'
 }
 }
-
-throw new Error('No se pudo obtener el enlace de descarga')
-} catch (e) {
-console.error('Error en Stellar API:', e.message)
+return null
+} catch {
 return null
 }
 }
 
-async function getYupra(url) {
+async function getshadowv(url) {
 try {
-const api = `https://api.yupra.my.id/api/downloader/ytmp4?url=${encodeURIComponent(url)}`
+const api = `https://api-shadowxyz.vercel.app/download/ytmp4V2?url=${encodeURIComponent(url)}`
 const res = await fetch(api)
 const data = await res.json()
 
-if (data?.result?.formats?.[0]?.url) {
+if (data?.status === true && data?.result?.download_url) {
 return {
-link: data.result.formats[0].url,
-title: data.result.title || 'Desconocido',
+link: data.result.download_url,
 format: 'mp4'
 }
 }
-throw new Error('No se pudo obtener el enlace de descarga')
-} catch (e) {
-console.error('Error en Yupra API:', e.message)
+return null
+} catch {
 return null
 }
 }
 
-var handler = async (m, { text, conn, command }) => {
-if (!text) return conn.sendMessage(m.chat, { text: `Ingrese el comando y escriba lo que quiere buscar en *YouTube*.\n\n• Por ejemplo:\n*#${command}* Jacob and the stone.` }, { quoted: m })
+var handler = async (m, { text, conn }) => {
+if (!text) return conn.reply(m.chat, `Ingrese el comando y escriba lo que quiera buscar para descargar.\n\n• Por ejemplo:\n*${usedPrefix + command}* Rosas`, m)
 
 try {
-await conn.sendMessage(m.chat, { text: `Buscando resultados, espere un momento...` }, { quoted: m })
+await m.react('⏰')
 const results = await yts(text)
 const videos = results.videos.slice(0, 15)
-if (!videos.length) return conn.sendMessage(m.chat, { text: `📍  No se han encontrado videos relacionados, intentelo de nuevo.` }, { quoted: m })
+if (!videos.length) return conn.reply(m.chat, '📍  No han se encontraron resultados.\n- Intente especificar el nombre.', m)
+
 ytCache[m.sender] = { results: videos, timestamp: Date.now() }
-let resultadoYt = `·─┄ · ✦ *YouTube : Search* ✦ ·
-- _Responda a este mensaje con el formato y numero junto para descargarlo._
 
-• Por ejemplo:
-a2 *(Descarga en audio)*
-v2 *(Descarga en video)*
+let caption = `·─┄ · ✦ *Search : YouTube* ✦ ·
 
-·────────────────·\n\n`
+\t\t⧡ Busqueda : *${text}*
+\t\t⧡ Resultados : *15*
+
+📍  Responda a este mensaje con *V* o *A* con su número.
+
+\t⚶ Por ejemplo:
+v1
+a1`
 
 for (let i = 0; i < videos.length; i++) {
 const v = videos[i]
-resultadoYt += `⊹⟡ *${i + 1}.* ${v.title}\n`
-resultadoYt += `⊹⟡ *Duración:* ${v.timestamp || 'Desconocida'}\n`
-resultadoYt += `⊹⟡ *Subido:* ${v.ago || 'N/D'}*\n`
-resultadoYt += `⊹⟡ *Enlace:* ${v.url}\n`
-resultadoYt += `\n${'-'.repeat(38)}\n\n`
+caption += `\t⚶ *${i + 1}:* ${v.title}\n`
+caption += `\t⚶ Duracion : *${v.timestamp || 'Desconocida'}*\n`
+caption += `\t⚶ Publicado : *${v.ago || 'N/D'}*\n`
+caption += `\t⚶ Vistas : *${formatNumber(v.views)}*\n\n`
 }
-await conn.sendMessage(m.chat, { image: { url: videos[0].thumbnail }, caption: resultadoYt }, { quoted: m })
+await conn.sendMessage(m.chat, { image: { url: videos[0].thumbnail }, caption }, { quoted: m })
+await m.react('✅')
 } catch (e) {
-conn.sendMessage(m.chat, { text: `📍  Ocurrio un error al procesar la busqueda de resultados.` }, { quoted: m })
+await m.react('❌')
+conn.reply(m.chat, `📍 ${e.message}`, m)
 }
 }
 
@@ -110,42 +113,43 @@ const index = parseInt(match[2]) - 1
 
 const userCache = ytCache[m.sender]
 if (!userCache || !userCache.results[index] || Date.now() - userCache.timestamp > CACHE_TIME)
-return conn.sendMessage(m.chat, { text: `📍  La lista de seleccion a expirado.\n- Use de nuevo el comando para tener 1 minuto de seleccion.` }, { quoted: m })
+return conn.reply(m.chat, '📍  La lista de selección ha caducado.\n- Use de nuevo el comando.', m)
 
 const video = userCache.results[index]
 
 try {
-await conn.sendMessage(m.chat, { text: `Descargando, espere un momento...` }, { quoted: m })
-const apiData = type === 'audio'
-? await getStellar(video.url)
-: await getYupra(video.url)
+await m.react('⏰')
 
-if (!apiData) return conn.sendMessage(m.chat, { text: `📍  Ocurrio un error con la api de descarga.` }, { quoted: m })
+const apiData = type === 'video'
+? await getshadowa(video.url)
+: await getshadowv(video.url)
+
+if (!apiData) return conn.reply(m.chat, `📍 error_api`, m)
 
 const size = await getSize(apiData.link)
 const mb = size / (1024 * 1024)
 const sendAsDoc = mb > MAX_FILE_SIZE_MB
 
-const textoResultado = `🝐✦  *YouTube : Download*
-
-⊹ ✎ *Titulo:* ${apiData.title}
-⊹ ✎ *Duración:* ${video.timestamp || 'Desconocida'}
-⊹ ✎ *Tamaño:* ${formatSize(size)}`
+const caption = `📡 *${video.title}*\n🌾 *Duración:* ${video.timestamp || 'Desconocida'}\n💮 *Tamaño:* ${formatSize(size)}`
 
 if (sendAsDoc) {
-await conn.sendMessage( m.chat, { document: { url: apiData.link }, fileName: `${apiData.title}.${apiData.format}`, mimetype: type === 'audio' ? 'audio/mpeg' : 'video/mp4', caption: textoResultado + `\n\n> ⩽ *Detalles* ⩾\nPeso: (${MAX_FILE_SIZE_MB} MB)` }, { quoted: m })
+await conn.sendMessage(m.chat, { document: { url: apiData.link }, fileName: `${video.title}.${apiData.format}`, mimetype: type === 'audio' ? 'audio/mpeg' : 'video/mp4', caption: `🎬  *download-youtube_video.mp4*  [doc]` }, { quoted: m } )
 } else if (type === 'audio') {
-await conn.sendMessage( m.chat, { audio: { url: apiData.link }, fileName: `${apiData.title}.mp3`, mimetype: 'audio/mpeg', ptt: false, caption: `✓  Audio descargado.` }, { quoted: m })
+await conn.sendMessage(m.chat, { audio: { url: apiData.link }, fileName: `${video.title}.mp3`, mimetype: 'audio/mpeg', ptt: false, "🎧  *download-songs_audio.mp3*  [doc]" }, { quoted: m } )
 } else {
-await conn.sendMessage( m.chat, { video: { url: apiData.link }, fileName: `${apiData.title}.mp4`, mimetype: 'video/mp4', caption: `✓  Video descargado.` }, { quoted: m })
+await conn.sendMessage(m.chat, { video: { url: apiData.link }, fileName: `${video.title}.mp4`, mimetype: 'video/mp4', "🎬  *download-youtube_video.mp4*  [doc]" }, { quoted: m } )
 }
 
-
+await m.react('✅')
 } catch (e) {
-await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = Command error, try again and if the error persists, report the command.` }, { quoted: m })
+await m.react('❌')
+conn.reply(m.chat, `📍 ${e.message}`, m)
 }
 }
 
-handler.command = ['yts', 'playlist']
+handler.help = ['ytbuscar <texto>']
+handler.tags = ['search']
+handler.command = ['songs', 'yts']
 
 export default handler
+       
