@@ -8,19 +8,12 @@ await m.react("⏰")
 const result = await twitterScraper(text);
 if (!result.status) return conn.reply(m.chat, `📍  No se ha podido obtener el contenido de Twitter.`, m)
 if (result.data.type === 'video') {
-let videoText = `\t〨  *T W I T T E R*
-
-\t⸭ ✅ ${result.data.title}
-
-\t\t⧡ Duracion : ${result.data.duration}
-\t\t⧡ Enlace : ${text}
-
-> ${textbot}`
+let videoText = `🎬  *download-twitter_video.mp4*`
 conn.sendFile(m.chat, result.data.dl[0].url, "video.mp4", videoText, m)
 
 } else {
 await conn.sendMessage(m.chat, { image: { url: result.data.imageUrl },
-caption: `✓  Imagen de Twitter descargada.`}, { quoted: m })
+caption: `🖼️  *download-twitter_image.jpg*` }, { quoted: m })
 }} catch (e) {
 return await conn.sendMessage(m.chat, { text: `*[ 📍 ]*  ERROR_COMMAND = ${e}` }, { quoted: m })
 }}
