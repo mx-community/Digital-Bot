@@ -65,11 +65,12 @@ str = `❤️ \`${name2}\` *se embarazo a sí mismo/a.*`.trim();
 }
 
 if (m.isGroup) { 
-let pregg = [ 'https://files.catbox.moe/6elx4y.jpg', 'https://files.catbox.moe/q548zn.jpg', 'https://files.catbox.moe/93r4km.jpg' ];
+let pregg = [ 'https://qu.ax/NbSKU', 'https://qu.ax/MDb3j', 'https://qu.ax/juW7Z', 'https://qu.ax/ATldC' ];
+ //[ 'https://files.catbox.moe/6elx4y.jpg', 'https://files.catbox.moe/q548zn.jpg', 'https://files.catbox.moe/93r4km.jpg' ];
 const imagen = pregg[Math.floor(Math.random() * pregg.length)];
 let mentions = [who];
-conn.sendMessage(m.chat, { image: { url: imagen }, caption: str, mentions: mentions }, { quoted: m })
- //conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
+//conn.sendMessage(m.chat, { image: { url: imagen }, caption: str, mentions: mentions }, { quoted: m })
+ conn.sendMessage(m.chat, { video: { url: imagen }, gifPlayback: true, caption: str, mentions }, { quoted: m });
  }
 }
 
