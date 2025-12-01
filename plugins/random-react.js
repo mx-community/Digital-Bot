@@ -65,7 +65,7 @@ str = `❤️ \`${name2}\` *se embarazo a sí mismo/a.*`.trim();
 }
 
 if (m.isGroup) { 
-let pregg = [ 'https://qu.ax/NbSKU', 'https://qu.ax/MDb3j', 'https://qu.ax/juW7Z', 'https://qu.ax/ATldC' ];
+let pregg = [ 'https://files.catbox.moe/tb5mah.mp4', 'https://files.catbox.moe/49hszx.mp4', 'https://files.catbox.moe/5wba6r.mp4', 'https://files.catbox.moe/tv04zm.mp4' ];
  //[ 'https://files.catbox.moe/6elx4y.jpg', 'https://files.catbox.moe/q548zn.jpg', 'https://files.catbox.moe/93r4km.jpg' ];
 const imagen = pregg[Math.floor(Math.random() * pregg.length)];
 let mentions = [who];
