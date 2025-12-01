@@ -55,23 +55,24 @@ conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: st
 }
 
 //preg
-if (command === "preg" || command === "embarazar") {
+if (command === "preg" || command === "preñar") {
 if (m.mentionedJid.length > 0) {
-str = `\`${name2}\` *embarazo a* \`${name || who}\`.`;
+str = `❤️ \`${name2}\` *embarazó a* \`${name || who}\`.`;
 } else if (m.quoted) {
-str = `\`${name2}\` *embarazo a* \`${name || who}\`.`;
+str = `❤️ \`${name2}\` *embarazó a* \`${name || who}\`.`;
 } else {
-str = `\`${name2}\` *se embarazo a sí mismo/a.*`.trim();
+str = `❤️ \`${name2}\` *se embarazo a sí mismo/a.*`.trim();
 }
 
 if (m.isGroup) { 
-let preg = [ "https://qu.ax/gPhe2", "https://qu.ax/Osnkd", "https://qu.ax/Zcl8w" ];
-const video = preg[Math.floor(Math.random() * preg.length)];
+let pregg = [ 'https://files.catbox.moe/6elx4y.jpg', 'https://files.catbox.moe/q548zn.jpg', 'https://files.catbox.moe/93r4km.jpg' ];
+const imagen = pregg[Math.floor(Math.random() * pregg.length)];
 let mentions = [who];
- await conn.sendMessage(m.chat, { image: { url: video }, caption: str, mentions: mentions }, { quoted: m })
-  //conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
+conn.sendMessage(m.chat, { image: { url: imagen }, caption: str, mentions: mentions }, { quoted: m })
+ //conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
  }
 }
+
 
 //Hug
 if (command === "hug" || command === "abrazo") {
