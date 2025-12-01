@@ -65,10 +65,11 @@ str = `\`${name2}\` *se embarazo a sí mismo/a.*`.trim();
 }
 
 if (m.isGroup) { 
-let preg = [ "https://qu.ax/NbSKU", "https://qu.ax/MDb3j", "https://qu.ax/juW7Z", "https://qu.ax/ATldC" ];
+let preg = [ "https://qu.ax/gPhe2", "https://qu.ax/Osnkd", "https://qu.ax/Zcl8w" ];
 const video = preg[Math.floor(Math.random() * preg.length)];
 let mentions = [who];
- await conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
+ await conn.sendMessage(m.chat, { image: { url: video }, caption: str, mentions: mentions }, { quoted: m })
+  //conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
  }
 }
 
