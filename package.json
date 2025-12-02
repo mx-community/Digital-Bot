@@ -24,10 +24,9 @@
 "dependencies": {
 "@hapi/boom": "^10.0.1",
 "@vitalets/google-translate-api": "^8.0.0",
-"@whiskeysockets/baileys": "github:this-xyz/baileys",
-"@StarlightsTeam/Scraper": "github:IrokzDal/Scraper",
+"@whiskeysockets/baileys": "github:AkiraDevX/baileys",
 "acrcloud": "^1.4.0",
-"aptoide-scraper": "github:DIEGO-OFC/dv-aptoide-scraper",
+"aptoide-scraper": "github:shadox-xyz/aptoide-scraper",
 "awesome-phonenumber": "^3.4.0",
 "axios": "^1.1.2",
 "cfonts": "^3.3.0",
@@ -40,7 +39,6 @@
 "google-libphonenumber": "3.2.38",
 "human-readable": "^0.2.1",
 "jsdom": "^20.0.1",
-"jszip": "^3.10.1",
 "jimp": "^0.16.3",
 "lodash": "^4.17.21",
 "lowdb": "^3.0.0",
@@ -48,7 +46,6 @@
 "mime-types": "^3.0.1",
 "node-cache": "^5.1.2",
 "node-fetch": "^3.2.10",
-"node-id3": "^0.2.6",
 "node-webpmux": "^3.1.3",
 "performance-now": "^2.1.0",
 "pino": "^8.6.1",
@@ -57,11 +54,8 @@
 "terminal-image": "^2.0.0",
 "url-regex-safe": "^3.0.0",
 "ws": "^8.18.3",
-"javascript-obfuscator": "^4.0.0",
 "yargs": "^17.3.1",
-"yt-search": "^2.10.3",
-"ytdl-core": "latest",
-"axios-cookiejar-support": "*"
+"yt-search": "^2.10.3"
 },
 "optionalDependencies": {
 "moment-timezone": "^0.5.37",
