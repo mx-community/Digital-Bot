@@ -8,29 +8,25 @@ const LimitVid = 425 * 1024 * 1024 // 425MB
 let tempStorage = {}
 
 const handler = async (m, {conn, command, args, text, usedPrefix}) => {
-let usoCorrecto = `\t\t【  Y O U T U B E  :  P L A Y 】
-
-\t⸭ 📌 Ingrese el comando y escriba o pegue un enlace de un video de \`YouTube\` para descargar.
+let usoCorrecto = `Proporcione un texto para buscar en YouTube.
 
 \t\t⚶ Por ejemplo :
-\t*#${command}* Yo te esperaré.
-
-> ${textbot}`
+\t*#${command}* Yo te esperaré.`
 if (!text) return conn.reply(m.chat, usoCorrecto, m)
   await m.react("⏰")
 const yt_play = await search(args.join(' '))
 const ytplay2 = await yts(text)
-const texto1 = `\t\t【  Y O U T U B E  :  P L A Y  】
+const texto1 = `· ┄ · ⊸ 𔓕 *Play  :  YouTube*
 
-\t⸭ ✅ ${yt_play[0].title}
+\t＃ Titulo : ${yt_play[0].title}
+\t＃ Publicado : ${yt_play[0].ago}
+\t＃ Duración : ${secondString(yt_play[0].duration.seconds)}
+\t＃ Vistas : ${MilesNumber(yt_play[0].views)}
+\t＃ Enlace : ${yt_play[0].url.replace(/^https?:\/\//, '')}
 
-\t\t⧡ Publicado : ${yt_play[0].ago}
-\t\t⧡ Duración : ${secondString(yt_play[0].duration.seconds)}
-\t\t⧡ Vistas : ${MilesNumber(yt_play[0].views)}
-\t\t⧡ Author : *${yt_play[0].author.name}*
-\t\t⧡ Link : ${yt_play[0].url.replace(/^https?:\/\//, '')}
-
-\t⚶ 📍 Responda a este mensaje con *"Audio"* o *"Video"* para descargar.
+\`Responda con:\`
+Audio = *(mp3)*
+Video = *(mp4)*
 
 > ${textbot}`.trim()
 
@@ -38,8 +34,8 @@ tempStorage[m.sender] = {url: yt_play[0].url, title: yt_play[0].title}
 
 const thumbXd = (await conn.getFile(yt_play[0].thumbnail))?.data
 await conn.sendMessage(m.chat, { text: texto1, mentions: [m.sender], contextInfo: { externalAdReply: { 
-title: "々  P L A Y  :  Y T  々", 
-body: botname, 
+title: "き  T O ᖇ ᑌ  ⚶", 
+body: "YouTube download.", 
 thumbnail: thumbXd, 
 sourceUrl: null, 
 mediaType: 1, renderLargerThumbnail: false }}}, { quoted: m })
@@ -150,11 +146,10 @@ await conn.sendMessage(m.chat, {audio: isDirect ? mediaData : {url: mediaData}, 
 await m.react("✅")
 }
 } else {
-await conn.reply(m.chat, '📍  No se ha podido descargar el audio.\n- Si el error persiste, reporte el comando.', m || null)
+await conn.reply(m.chat, 'No se ha podido descargar el audio.\n- Si el error persiste, reporte el comando.', m || null)
 }
 } else if (text === '❤️' || text === 'video') {
 await m.react("⏰")
-//conn.reply(m.chat, "", m || null)
 const {mediaData, isDirect} = await download(videoApis)
 if (mediaData) {
 const fileSize = await getFileSize(mediaData)
@@ -167,8 +162,8 @@ await conn.sendMessage(m.chat, {video: isDirect ? mediaData : {url: mediaData}, 
 await m.react("✅")
 }
 } else {
-await conn.reply(m.chat, '📍  No se ha podido descargar el video.\n- Si el error persiste, reporte el comando.', m || null)
-await m.react("❌")
+await conn.reply(m.chat, 'No se ha podido descargar el video.\n- Si el error persiste, reporte el comando.', m || null)
+await m.react("📍")
 }
 }
 } catch (error) {
@@ -300,3 +295,4 @@ resolve({title, result: tinyUrl, rersult2: resultFix[0].video, thumb})
 })
                   }
   
+
