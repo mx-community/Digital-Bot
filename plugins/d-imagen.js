@@ -1,19 +1,24 @@
 import axios from 'axios'
-
-const handler = async (m, { conn, text, usedPrefix }) => {
-if (!text) return conn.reply(m.chat, `❀ Por favor, ingrese un texto para buscar una Imagen.`, m)
+const handler = async (m, { conn, text, usedPrefix, command }) => {
+if (!text) return conn.sendMessage(m.chat, { text: `Proporcione un texto para buscar imágenes.\n\n\t\t⚶ Por ejemplo:\n*#${command}* Arboles` }, { quoted: m })
 try {
-await m.react('🕒')
+await m.react('⏰')
 const res = await getGoogleImageSearch(text)
 const urls = await res.getAll()
-if (urls.length < 2) return conn.reply(m.chat, '✧ No se encontraron suficientes imágenes para un álbum.', m)
+if (urls.length < 2) return conn.sendMessage(m.chat, { text: `No hay suficientes imagenes.` }, { quoted: m })
 const medias = urls.slice(0, 10).map(url => ({ type: 'image', data: { url } }))
-const caption = `❀ Resultados de búsqueda para: ${text}`
+const caption = `· ┄ · ⊸ 𔓕 *Images  :  Search*
+
+\t\t＃ Busqueda : *${text}*
+\t\t＃ Imagenes : *${urls.length} images*
+\t\t＃ Fuente : *Google*
+
+> ${textbot}`
 await conn.sendSylphy(m.chat, medias, { caption, quoted: m })
-await m.react('✔️')
+await m.react('✅')
 } catch (error) {
-await m.react('✖️')
-conn.reply(m.chat, `⚠︎ Se ha producido un problema.\n> Usa *${usedPrefix}report* para informarlo.\n\n${error.message}`, m)
+await m.react('📍')
+conn.reply(m.chat, `${error.message}`, m)
 }}
 
 handler.help = ['imagen']
